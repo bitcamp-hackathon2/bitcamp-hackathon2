@@ -107,3 +107,111 @@
   font-size: 45px;
   line-height: 45px;
 }
+
+.user-login {
+  display: inline-block;
+  width: 888px;
+  height: 500px;
+  margin-left: 58px;
+  padding-top: 20px;
+  padding-left: 20px;
+  border: 2px solid;
+}
+.user-login span {
+  display: inline-block;
+  width: 850px;
+  height: 40px;
+  margin-top: 25px;
+  text-align: right;
+  color: white;
+  font-size: 45px;
+  line-height: 45px;
+}
+.user-login input {
+  display: inline-block;
+  width: 850px;
+  height: 100px;
+  margin-top: 25px;
+  font-size: 80px;
+  font-weight: bold;
+  background-color: unset;
+  color: white;
+  outline: none;
+}
+.user-login-btn {
+  display: inline-block;
+  width: 850px;
+  height: 100px;
+  margin-top: 25px;
+  font-size: 80px;
+  font-weight: bold;
+  background-color: rgb(34, 34, 255);
+  border: 0;
+  color: white;
+}
+.user-login-id{
+
+}
+
+
+
+.user-info {
+  display: inline-block;
+  width: 900px;
+  height: 500px;
+  border: 2px solid;
+  padding-top: 20px;
+  padding-left: 20px;
+  border: 2px solid;
+}
+.user-info-id {
+
+}
+.user-info span {
+  display: inline-block;
+  width: 850px;
+  height: 40px;
+  margin-top: 25px;
+  text-align: right;
+  color: white;
+  font-size: 45px;
+  line-height: 45px;
+}
+.user-info input {
+  display: inline-block;
+  width: 850px;
+  height: 100px;
+  margin-top: 25px;
+  font-size: 80px;
+  font-weight: bold;
+  background-color: unset;
+  color: white;
+  outline: none;
+}
+
+.user-etc{
+  width: 1800px;
+  height: 500px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.user-etc span {
+  display: inline-block;
+  width: 850px;
+  height: 40px;
+  color: white;
+  font-size: 45px;
+  line-height: 45px;
+}
+.user-etc-text {
+  display: inline-block;
+  width: 1780px;
+  height: 430px;
+  margin-top: 15px;
+  background-color: rgb(30, 30, 255);
+  border: 0;
+  outline: none;
+  color: white;
+  font-size: 50px;
+}

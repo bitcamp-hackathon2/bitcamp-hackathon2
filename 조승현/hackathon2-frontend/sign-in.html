@@ -225,10 +225,10 @@ body {
     <div class="container__form container--signup">
       <form action="#" class="form" id="form1">
         <h2 class="form__title">Sign Up</h2>
-        <input type="text" placeholder="name" class="input sign-new-name" />
+        <input type="text" placeholder="닉네임" class="input sign-new-name" />
         <input type="text" placeholder="ID" class="input sign-new-id" />
         <input type="password" placeholder="비밀번호 (8 ~ 자리)" class="input sign-new-password" />
-        <input type="text" placeholder="색 (예. yellow => FFFF00)" class="input sign-new-color" />
+        <input type="text" placeholder="기타(etc.)" class="input sign-new-etc" />
         <button class="btn sign-new-btn">Sign Up</button>
       </form>
     </div>
@@ -264,7 +264,7 @@ body {
     let name;
     let id;
     let password;
-    let color;
+    let etc;
     $(".sign-old-btn").click(() => {
       id = $(".sign-old-id").val();
       password = $(".sign-old-password").val();
@@ -281,7 +281,7 @@ body {
             $(".sign-old-id").val("");
             $(".sign-old-password").val("");
             alert("로그인 완료");
-            location.href = `live.html?user=${fn.name},${fn.color}`;
+            location.href = `main-menu.html?user=${fn.name},${fn.id}`;
           }else{
             alert("아이디 및 패스워드 틀림");
             $(".sign-old-id").val("");
@@ -296,22 +296,22 @@ body {
       name = $(".sign-new-name").val();
       id = $(".sign-new-id").val();
       password = $(".sign-new-password").val();
-      color = $(".sign-new-color").val();
+      etc = $(".sign-new-etc").val();
       
-      if(name.length > 0 && id.length > 0 && password.length > 7 && color.length > 5){
+      if(name.length > 0 && id.length > 0 && password.length > 7 && etc.length >= 0){
         fetch("http://192.168.0.7:8080/insert", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
           },
-          body: `name=${name}&id=${id}&password=${password}&color=${color}`
+          body: `name=${name}&id=${id}&password=${password}&etc=${etc}`
         }).then((response) => response.json())
         .then((fn) => {
           if(fn.status == "success"){
             $(".sign-new-name").val("");
             $(".sign-new-id").val("");
             $(".sign-new-password").val("");
-            $(".sign-new-color").val("");
+            $(".sign-new-etc").val("");
             alert("회원가입 완료");
             container.classList.remove("right-panel-active");
           }else{
