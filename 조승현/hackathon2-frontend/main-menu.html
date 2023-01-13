@@ -22,6 +22,7 @@
             <li>3. &nbsp게임?</li>
             <li>4. &nbsp회원 관리/내 정보</li>
             <li>5. &nbsp그 때 그시절..</li>
+            <li>6. &nbsp..</li>
           </ul>
         </div>
       </div>
@@ -34,6 +35,7 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script>
+    let all = location.href.split("?")[1];
     let dreg = 1;
     $(document).on("keydown", (e) => {
       if(e.keyCode == 38){
@@ -62,7 +64,19 @@
     })
     $(document).on("keydown", (e) => {
       if(e.keyCode == 13) {
-        console.log(dreg);
+        if(dreg == 1){
+          location.href = `live.html?${all}`;
+        }else if(dreg == 2){
+          location.href = `?${all}`;
+        }else if(dreg == 3){
+          location.href = `?${all}`;
+        }else if(dreg == 4){
+          location.href = `user-info.html?${all}`;
+        }else if(dreg == 5){
+          location.href = `?${all}`;
+        }else if(dreg == 6){
+          location.href = `?${all}`;
+        }
       }
     })
   
