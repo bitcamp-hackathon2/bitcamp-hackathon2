@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>텔텔텔</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+  <div class="background">
+    <div class="title">
+      <span>하이텔</span>
+    </div>
+    <div class="body">
+      <div class ="contents">
+        <div class="contents-title">
+          <span>Contents - LIST</span>
+        </div>
+        <div class="contents-contents">
+          <ul>
+            <li class="checked">1. &nbsp라이브 채팅</li>
+            <li>2. &nbsp방명록</li>
+            <li>3. &nbsp게임?</li>
+            <li>4. &nbsp회원 관리/내 정보</li>
+            <li>5. &nbsp그 때 그시절..</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="help">
+        <span>항목 변경은 키보드 (↑)(↓) 을 사용하고, 선택은 엔터 Enter 를 누르시면 됩니까</span>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    let dreg = 1;
+    $(document).on("keydown", (e) => {
+      if(e.keyCode == 38){
+        for(let i = 0; i < $("li").length; i++) {
+          if($("li")[i].className == "checked"){
+            if(i > 0) {
+              $("li")[i].className = "";
+              $("li")[i-1].className = "checked";
+              dreg = i;
+            }
+            break;
+          }
+        }
+      }else if(e.keyCode == 40){
+        for(let i = 0; i < $("li").length; i++) {
+          if($("li")[i].className == "checked"){
+            if(i < $("li").length-1) {
+              $("li")[i].className = "";
+              $("li")[i+1].className = "checked";
+              dreg = i+2;
+            }
+            break;
+          }
+        }
+      }
+    })
+    $(document).on("keydown", (e) => {
+      if(e.keyCode == 13) {
+        console.log(dreg);
+      }
+    })
+  
+  </script>
+</body>
+</html>
