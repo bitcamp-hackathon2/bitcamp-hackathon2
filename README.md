@@ -12,10 +12,10 @@
 
 ### 회원가입 정보
 
-| 정보     | 변수명   |
-| -------- | -------- |
-| ~~이름~~ | ~~name~~ |
-| ID       | id       |
-| PW       | password |
-| 별명     | nickname |
-| 기타     | etc      |
+| 정보     | 변수명   | type   |
+| -------- | -------- | ------ |
+| ~~이름~~ | ~~name~~ |        |
+| ID       | id       | String |
+| PW       | password | String |
+| 별명     | name     | String |
+| 기타     | etc      | String |
