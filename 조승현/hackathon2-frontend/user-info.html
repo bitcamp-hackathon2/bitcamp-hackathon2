@@ -77,7 +77,9 @@
         })
     })
     $(".ibd").click(() => {
-      fetch("http://192.168.0.7:8080/removeuser", {
+      let asking = confirm("계정을 삭제 하시겠습니가?")
+      if(asking){
+        fetch("http://192.168.0.7:8080/removeuser", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -92,6 +94,9 @@
             alert("계정 삭제 안대");
           }
         })
+      }
+
+      
     })
   </script>
 </body>

@@ -94,11 +94,11 @@
   <script>
     let all = location.href.split("?")[1];
     let name = all.split("=")[1].split(",")[0]
-    let  = all.split("=")[1].split(",")[1]
+    let id = all.split("=")[1].split(",")[1]
     let last = -1;
     $(".content").on("keydown", (e) =>{
       if(e.keyCode == 13 && $(".content").val() != "" && $(".content").val() != " "){
-        fetch(`http://192.168.0.7:8080/add?content=${$(".content").val()}&user=${name},${etc}`, {
+        fetch(`http://192.168.0.7:8080/add?content=${$(".content").val()}&user=${name},${id}`, {
         method: "GET"
       }).then(() => {
         $(".content").val("");

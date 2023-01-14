@@ -217,6 +217,39 @@ body {
     z-index: 5;
   }
 }
+  .sign-new-id {
+    position: relative;
+  }
+  .container--signup{
+    position: relative;
+  }
+  .sign-new-checkid {
+    position: absolute;
+    top: 157px;
+    right: 40px;
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #008997;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    line-height: 13px;
+  }
+  
+  .sign-new-checkname {
+    position: absolute;
+    top: 97px;
+    right: 40px;
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #008997;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    line-height: 13px;
+  }
   </style>
 </head>
 <body>
@@ -230,6 +263,8 @@ body {
         <input type="password" placeholder="비밀번호 (8 ~ 자리)" class="input sign-new-password" />
         <input type="text" placeholder="기타(etc.)" class="input sign-new-etc" />
         <button class="btn sign-new-btn">Sign Up</button>
+        <button type="button" class="sign-new-checkid">중 복<br>확 인</button>
+        <button type="button" class="sign-new-checkname">중 복<br>확 인</button>
       </form>
     </div>
   
@@ -265,6 +300,8 @@ body {
     let id;
     let password;
     let etc;
+    let idchecked = false;
+    let namechecked = false;
     $(".sign-old-btn").click(() => {
       id = $(".sign-old-id").val();
       password = $(".sign-old-password").val();
@@ -298,7 +335,7 @@ body {
       password = $(".sign-new-password").val();
       etc = $(".sign-new-etc").val();
       
-      if(name.length > 0 && id.length > 0 && password.length > 7 && etc.length >= 0){
+      if(namechecked && idchecked && name.length > 0 && id.length > 0 && password.length > 7 && etc.length >= 0){
         fetch("http://192.168.0.7:8080/insert", {
           method: "POST",
           headers: {
@@ -314,8 +351,56 @@ body {
             $(".sign-new-etc").val("");
             alert("회원가입 완료");
             container.classList.remove("right-panel-active");
+            $('.sign-new-checkname').attr('disabled', false);
+            $('.sign-new-name').attr('disabled', false);
+            $('.sign-new-checkid').attr('disabled', false);
+            $('.sign-new-id').attr('disabled', false);
           }else{
             alert("회원가입 실패 (서버 연결 오류?)");
+          }
+        })
+      }
+    })
+    $(".sign-new-checkid").click(() => {
+      id = $(".sign-new-id").val();
+      if(id.length > 0) {
+        fetch("http://192.168.0.7:8080/checkid", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}`
+        }).then((response) => response.json())
+        .then((fn) => {
+          if(fn.status == "success"){
+            alert("아이디 사용 가능");
+            $('.sign-new-checkid').attr('disabled', true);
+            $('.sign-new-id').attr('disabled', true);
+            idchecked = true;
+          }else{
+            alert("사용 불가능한 아이디");
+          }
+        })
+      }
+    })
+    $(".sign-new-checkname").click(() => {
+      name = $(".sign-new-name").val();
+      if(name.length > 0) {
+        fetch("http://192.168.0.7:8080/checkname", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+          },
+          body: `name=${name}`
+        }).then((response) => response.json())
+        .then((fn) => {
+          if(fn.status == "success"){
+            alert("사용 가능한 닉네임");
+            $('.sign-new-checkname').attr('disabled', true);
+            $('.sign-new-name').attr('disabled', true);
+            namechecked = true;
+          }else{
+            alert("사용 불가능한 이름");
           }
         })
       }
