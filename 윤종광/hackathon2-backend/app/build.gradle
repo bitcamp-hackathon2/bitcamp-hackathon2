@@ -1,28 +1,18 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'eclipse'
     id 'org.springframework.boot' version '3.0.1'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-sourceCompatibility = '17'
-
-// Spring Configuration Processor 설정 정보
-configurations {
-  compileOnly {
-    extendsFrom annotationProcessor
-  }
-}
-
-// 의존 라이브러리가 업로드 되어 있는 서버 정보
-// 이 서버에서 라이브러리 파일을 다운로드 할 것이다.
 repositories {
-    mavenCentral()  // https://repo.maven.apache.org/maven2/
+    mavenCentral()
 }
 
-// 애플리케이션에서 사용하는 외부 라이브러리 정보
 dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.google.guava:guava:31.1-jre'
+
     // Spring Boot 기본 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -41,12 +31,38 @@ dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
 }
 
-// 애플리케이션 테스트에 사용할 단위 테스트 프레임워크 설정
-tasks.named('test') {
-  useJUnitPlatform()
+application {
+    mainClass = 'hackathon2.backend.App'
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'hackathon2.backend.App'
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8' 
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+}
+
+eclipse {
+    project {
+        name = "bitcamp-hackathon2"
+    }
+    jdt {
+      sourceCompatibility = 17
+      targetCompatibility = 17
+      javaRuntimeName = "JavaSE-17"
+    }
+}
+
+// 배포 파일(.jar, .zip 등)을 만들 때 사용할 이름 설정
+group = 'bitcamp'
+version = '0.0.1-SNAPSHOT'
+
+// Spring Configuration Processor 설정 정보
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }

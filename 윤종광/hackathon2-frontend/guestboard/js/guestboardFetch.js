@@ -1,3 +1,4 @@
+/*
 fetch("http://localhost:8080/guestboard")
 .then((response) => response.json())
 .then((obj) => {
@@ -28,6 +29,29 @@ fetch("http://localhost:8080/guestboard")
 
   })
   .catch((err) => {
-    alert('서버 요청 오류!');
+    // alert('서버 요청 오류!');
     console.log(err);
   })
+  */
+
+function requestPost() {
+  const id = 0;
+  const content = document.querySelector('#writeArea');
+
+  fetch('http://localhost:8080/guestboard', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `id=${id}&content=${content}`
+  })
+    .then((response) => response.json())
+    .then((obj) => {
+      location.href = 'guestboard.html';
+    })
+    .catch((err) => {
+      alert('서버 요청 오류!');
+      console.log(err);
+  })
+  
+}

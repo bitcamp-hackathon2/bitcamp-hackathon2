@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   font-family: DungGeunMo, Courier;
 }
@@ -70,6 +77,10 @@ textarea {
   display: none;
 }
 
+.charCountRed {
+  color: #df0101;
+}
+
 #body {
   width: 1200px;
   margin: auto;
@@ -124,7 +135,7 @@ textarea {
   transform: translate(-50%, -50%)
 }
 
-#write-btn {
+#writeBtn {
   float: right;
 }
 
@@ -179,7 +190,9 @@ textarea {
   color: #df0101;
 }
 
+/*
 #likeIcon:hover::after {
   content: "♥";
   color: #df0101;
 }
+*/
