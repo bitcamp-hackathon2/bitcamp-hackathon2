@@ -32,6 +32,11 @@
     let id  = all.split("=")[1].split(",")[1]
     let etc;
     let password;
+    $('.ibc').attr('disabled', true);
+    $('.ibd').attr('disabled', true);
+    $('.user-info-name').attr('disabled', true);
+    $('.user-etc-text').attr('disabled', true);
+
     $(".user-login-id").val(id)
     $(".lb").click(() => {
       password = $(".user-login-password").val();
@@ -52,6 +57,10 @@
             $('.user-login-password').attr('disabled', true);
             $(".user-info-name").val(decodeURI(name));
             $(".user-etc-text").val(etc);
+            $('.ibc').attr('disabled', false);
+            $('.ibd').attr('disabled', false);
+            $('.user-info-name').attr('disabled', false);
+            $('.user-etc-text').attr('disabled', false);
           }else{
             alert("패스워드 틀림");
           }
@@ -60,7 +69,9 @@
       }
     })
     $(".ibc").click(() => {
-      fetch("http://192.168.0.7:8080/changeinfo", {
+      let asking = confirm("계정을 변경 하시겠습니가?")
+      if(asking){
+        fetch("http://192.168.0.7:8080/changeinfo", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -69,12 +80,14 @@
         }).then((response) => response.json())
         .then((fn) => {
           if(fn.status == "success"){
-            alert("정적으로 변경 됨");
+            alert("정상적으로 변경 됨");
             location.href = `main-menu.html?user=${$(".user-info-name").val()},${id}`;
           }else{
             alert("변경 실패");
           }
         })
+      }
+      
     })
     $(".ibd").click(() => {
       let asking = confirm("계정을 삭제 하시겠습니가?")

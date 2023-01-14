@@ -21,7 +21,7 @@
             <li>2. &nbsp방명록</li>
             <li>3. &nbsp게임?</li>
             <li>4. &nbsp회원 관리/내 정보</li>
-            <li>5. &nbsp그 때 그시절..</li>
+            <li>5. &nbsp그 때 그시절..☆</li>
             <li>6. &nbsp..</li>
           </ul>
         </div>
@@ -71,7 +71,11 @@
         }else if(dreg == 3){
           location.href = `?${all}`;
         }else if(dreg == 4){
-          location.href = `user-info.html?${all}`;
+          if(all.split("=")[1].split(",")[1] == "admin"){
+            location.href = `admin-info.html?${all}`;
+          }else{
+            location.href = `user-info.html?${all}`;
+          }
         }else if(dreg == 5){
           location.href = `?${all}`;
         }else if(dreg == 6){

@@ -24,8 +24,8 @@ public class App {
   @GetMapping("/add")
   public void add(String content, String user) {
     for (int i = 0; i < UserDAO.users.size(); i++) {
-      if (UserDAO.users.get(i).getName().equals(user.split(",")[0])) {
-        ChatControll.chatAdd(user.split(",")[0] + ": " + content);
+      if (UserDAO.users.get(i).getId().equals(user.split(",")[1])) {
+        ChatControll.chatAdd(UserDAO.users.get(i).getName() + ": " + content);
       }
     }
   }

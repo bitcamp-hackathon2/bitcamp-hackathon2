@@ -7,7 +7,6 @@ public class ChatControll {
   static int idx = 0;
 
   public static void chatAdd(String str) {
-    System.out.println(str);
     liveChat.add((idx++) + "," + str);
   }
 

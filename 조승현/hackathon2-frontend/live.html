@@ -6,9 +6,14 @@
   <title>Page Title</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <style>
+    @font-face {
+        src : url(DungGeunMo.ttf);
+        font-family: "do" 
+      }
     * {
       margin: 0;
       padding: 0;
+      font-family: "do";
     }
     ul {
       display: inline-block;
@@ -26,7 +31,6 @@
       margin-right: auto;
       background-color: unset !important;
       color: white !important;
-      font-weight: bold !important;
       border: 0 !important;
       border-top: 4px solid blue !important;
       border-bottom: 4px solid black !important;
@@ -49,7 +53,6 @@
     }
     li {
       color: powderblue !important;
-      font-weight: bold !important;
       font-size: 30px !important;
     }
   </style>
@@ -119,9 +122,6 @@
             last = fn[fn.length-1].split(",")[0];
           }
          }
-
-
-        
       }).catch()
     }, 100);
   </script>

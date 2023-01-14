@@ -1,10 +1,14 @@
+@font-face {
+
+  src : url(DungGeunMo.ttf);
+  font-family: "do" 
+
+}
 * {
   margin: 0;
   padding: 0;
-  font-family: D2Coding;
-  font-weight: bold;
+  font-family: "do";
 }
-
 .background {
   background-color: rgb(0, 0, 175);
   width: 1920px;
@@ -116,7 +120,9 @@
   margin-left: 58px;
   padding-top: 20px;
   padding-left: 20px;
-  border: 2px solid;
+  border-top: 5px solid blue;
+  border-bottom: 5px solid black;
+  box-sizing: border-box;
 }
 .user-login span {
   display: inline-block;
@@ -134,7 +140,6 @@
   height: 100px;
   margin-top: 25px;
   font-size: 80px;
-  font-weight: bold;
   background-color: unset;
   color: white;
   outline: none;
@@ -143,9 +148,8 @@
   display: inline-block;
   width: 850px;
   height: 100px;
-  margin-top: 25px;
+  margin-top: 23px;
   font-size: 80px;
-  font-weight: bold;
   background-color: rgb(34, 34, 255);
   border: 0;
   color: white;
@@ -157,10 +161,11 @@
   display: inline-block;
   width: 900px;
   height: 500px;
-  border: 2px solid;
-  padding-top: 20px;
+  padding-top: 24px;
   padding-left: 20px;
-  border: 2px solid;
+  border-top: 5px solid blue;
+  border-bottom: 5px solid black;
+  box-sizing: border-box;
 }
 .user-info span {
   display: inline-block;
@@ -178,7 +183,6 @@
   height: 100px;
   margin-top: 25px;
   font-size: 80px;
-  font-weight: bold;
   background-color: unset;
   color: white;
   outline: none;
@@ -233,15 +237,24 @@
   color: white;
 }
 .left-bar span {
-  font-size: 40px;
+  font-size: 65px;
   margin-left: 10px;
 }
+
+.command {
+  width: 150px;
+  height: 1000px;
+  position: absolute;
+  left: 490px;
+  top: 200px;
+  font-size: 25px;
+  color: white;
+}
+
 .users-info {
-  width: 560px;
+  width: 400px;
   height: 1000px;
   margin-top: 45px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .right-body {
@@ -346,4 +359,14 @@
   margin-top: 10px;
   font-size: 40px;
   background-color: rgb(0, 0, 175);
+}
+
+.left-bar-title {
+  display: inline-block;
+  width: 550px;
+  height: 100px;
+  border-top: 4px solid blue;
+  border-bottom: 4px solid black;
+  text-align: center;
+  line-height: 100px;
 }

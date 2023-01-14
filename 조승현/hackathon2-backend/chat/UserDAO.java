@@ -47,4 +47,26 @@ public class UserDAO {
     }
     return false;
   }
+
+  public static boolean checkId(String id) {
+    for (int i = 0; i < users.size(); i++) {
+      if (users.get(i).getId().equals(id)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static boolean checkName(String name) {
+    for (int i = 0; i < users.size(); i++) {
+      if (users.get(i).getName().equals(name)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static Object userList() {
+    return users;
+  }
 }
