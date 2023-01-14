@@ -16,7 +16,7 @@ public class GuestboardDao {
   public void insert(Guestboard guestboard) {
     guestboard.setNo(++no);
     guestboard.setCreatedDate(new Date(System.currentTimeMillis()).toString());
-    guestboard.setNowMSec(System.currentTimeMillis());
+    guestboard.setCreatedTime(System.currentTimeMillis());
     this.guestboards[this.count++] = guestboard;
   }
 

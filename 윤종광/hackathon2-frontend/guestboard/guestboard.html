@@ -5,17 +5,76 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>방명록</title>
+  <link rel="stylesheet" href="css/guestbook.css">
 </head>
 <body>
-  <h1>방명록</h1>
-  <script>
-    fetch('http://localhost:8080/guestboard')
-      .then((response) => response.json())
-      .then((obj) => {console.log(obj)})
-      .catch((err) => {
-        alert('서버 요청 오류!');
-        console.log(err);
-      })
-  </script>
+  <div id="body">
+    <nav>
+      <div id="nav">
+      <span id="home-btn" class="clickable clickable-blue">[홈]</span>
+      <span id="writeGuestBoard" class="clickable clickable-blue">[글쓰기]</span>
+      </div>
+    </nav>
+    <header>
+      <div id="header">
+<pre id="title">
+                ■■      ■■  ■■             ■■■■■■■      ■■           ■■■■■■■■■■
+                ■■      ■■  ■■             ■■■■■■■  ■■■■           ■■■■■■■■■■
+                ■■■■■■■  ■■             ■■      ■■  ■■■■                           ■■
+                ■■■■■■■  ■■■■         ■■      ■■      ■■           ■■■■■■■■■■
+                ■■      ■■  ■■■■         ■■      ■■      ■■           ■■■■■■■■■■
+                ■■      ■■  ■■             ■■      ■■  ■■■■           ■■
+                ■■■■■■■  ■■             ■■■■■■■  ■■■■           ■■■■■■■■■■
+                ■■■■■■■  ■■             ■■■■■■■      ■■           ■■■■■■■■■■
+                                                                                            ■■
+                      ■■■■■■                       ■■■■■■               ■■■■■■■■■■
+                    ■■■■■■■■                   ■■■■■■■■             
+                  ■■            ■■               ■■            ■■           ■■■■■■■■■■
+                  ■■            ■■               ■■            ■■           ■■■■■■■■■■
+                    ■■■■■■■■                   ■■■■■■■■                             ■■
+                      ■■■■■■                       ■■■■■■                               ■■
+</pre>
+      </div>
+    </header>
+    
+    <ul id="guestbook-ul">
+      <li>
+        <div>
+          <span id="name"></span>
+          <span id="id"></span>
+          <span id="elapsedTime"></span>
+          <span id="like"></span>
+        </div>
+        <div>
+          <span id="content"></span>
+          <span id="delete-btn"></span>
+          <span id="update-btn"></span>
+        </div>
+      </li>
+    </ul>
+    </div>
+    
+    <div id="writeDiv" class="writeDivHide">
+      <div id="writeBG">
+      </div>
+      <div id="write">
+        <div id="write-title">
+          <span id="whatswrong">무슨 일이 일어나고 있나요?</span>
+          <span id="writeCloseBtn" class="clickable clickable-green">×</span>
+        </div>
+        <hr>
+        <div id="content-div">
+          <textarea id="write-content"></textarea>
+        </div>
+        <div id="writeInfo">
+          <span id="charCount">140</span>
+          <span id="write-btn" class="clickable clickable-green">[남기기]</span>
+        </div>
+      </div>
+    </div>
+    <script src="js/guestboard.js"></script>
+    <script src="js/guestboardFetch.js">
+
+    </script>
 </body>
 </html>

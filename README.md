@@ -12,10 +12,9 @@
 
 ### 회원가입 정보
 
-| 정보     | 변수명   | type   |
-| -------- | -------- | ------ |
-| ~~이름~~ | ~~name~~ |        |
-| ID       | id       | String |
-| PW       | password | String |
-| 별명     | name     | String |
-| 기타     | etc      | String |
+| 정보 | 변수명   | type   | 길이                    |
+| ---- | -------- | ------ | ----------------------- |
+| ID   | id       | String |                         |
+| PW   | password | String |                         |
+| 별명 | name     | String | 16글자(한글1자 = 2글자) |
+| 기타 | etc      | String |                         |

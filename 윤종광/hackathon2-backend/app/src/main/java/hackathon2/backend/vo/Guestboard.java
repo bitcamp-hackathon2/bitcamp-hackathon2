@@ -7,7 +7,7 @@ public class Guestboard {
   String etc;
   int no;
   String createdDate;
-  long nowMSec;
+  long createdTime;
   int like;
   String content;
 
@@ -47,11 +47,11 @@ public class Guestboard {
   public void setCreatedDate(String createdDate) {
     this.createdDate = createdDate;
   }
-  public long getNowMSec() {
-    return nowMSec;
+  public long getCreatedTime() {
+    return createdTime;
   }
-  public void setNowMSec(long nowMSec) {
-    this.nowMSec = nowMSec;
+  public void setCreatedTime(long nowMSec) {
+    this.createdTime = nowMSec;
   }
   public int getLike() {
     return like;
