@@ -258,8 +258,8 @@ body {
     <div class="container__form container--signup">
       <form action="#" class="form" id="form1">
         <h2 class="form__title">Sign Up</h2>
-        <input type="text" placeholder="닉네임" class="input sign-new-name" />
-        <input type="text" placeholder="ID" class="input sign-new-id" />
+        <input type="text" placeholder="닉네임 ( 1 ~ 9 자리의 문자 )" class="input sign-new-name" />
+        <input type="text" placeholder="ID ( 1 ~ 9 자리의 문자 )" class="input sign-new-id" />
         <input type="password" placeholder="비밀번호 (8 ~ 자리)" class="input sign-new-password" />
         <input type="text" placeholder="기타(etc.)" class="input sign-new-etc" />
         <button class="btn sign-new-btn">Sign Up</button>
@@ -335,7 +335,7 @@ body {
       password = $(".sign-new-password").val();
       etc = $(".sign-new-etc").val();
       
-      if(namechecked && idchecked && name.length > 0 && id.length > 0 && password.length > 7 && etc.length >= 0){
+      if(namechecked && idchecked && name.length > 0 && id.length > 0 && password.length > 7 && etc.length >= 0 && id.length < 10 && name.length < 10){
         fetch("http://192.168.0.7:8080/insert", {
           method: "POST",
           headers: {
@@ -359,11 +359,13 @@ body {
             alert("회원가입 실패 (서버 연결 오류?)");
           }
         })
+      }else {
+        alert("입력이 안됐거나\n길이가 너무길거나 짧거나\n중복 체크가 안됐거나\n택 1");
       }
     })
     $(".sign-new-checkid").click(() => {
       id = $(".sign-new-id").val();
-      if(id.length > 0) {
+      if(id.length > 0 && id.length < 10) {
         fetch("http://192.168.0.7:8080/checkid", {
           method: "POST",
           headers: {
@@ -381,11 +383,13 @@ body {
             alert("사용 불가능한 아이디");
           }
         })
+      }else{
+        alert("길거나 짧다");
       }
     })
     $(".sign-new-checkname").click(() => {
       name = $(".sign-new-name").val();
-      if(name.length > 0) {
+      if(name.length > 0 && name.length < 10) {
         fetch("http://192.168.0.7:8080/checkname", {
           method: "POST",
           headers: {
@@ -403,6 +407,8 @@ body {
             alert("사용 불가능한 이름");
           }
         })
+      }else{
+        alert("길거나 짧다");
       }
     })
   </script>
