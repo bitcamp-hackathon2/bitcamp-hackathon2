@@ -24,10 +24,6 @@
       <td><textarea name="content" rows="10" cols="50" id="f-content"></textarea></td>
     </tr>
     <tr>
-      <th>암호</th>
-      <td><input type="text" name="qpassword" id="f-qpassword"></td>
-    </tr>
-    <tr>
       <th>작성일</th>
       <td><span id="f-createddate"></span></td>
     </tr>
@@ -51,8 +47,7 @@ var values = location.href.split('?');
 if (values.length != 2) {
   alert("옳바른 페이지 주소가 아닙니다.");
   throw "no 파라미터 값이 누락되었습니다.";
-} 
-
+}
 // values[1] --> "no=20"
 // values2[0] --> "no"
 // values2[1] --> "20"
@@ -90,7 +85,8 @@ fetch(`http://localhost:8080/qnas/${no}`)
 document.querySelector('#update-btn').onclick = (e) => {
   var title = encodeURIComponent(document.querySelector('#f-title').value);
   var content = encodeURIComponent(document.querySelector('#f-content').value);
-  var qpassword = document.querySelector('#f-qpassword').value;
+  
+  var qpassword = prompt('암호를 입력하세요!');
 
   fetch(`http://localhost:8080/qnas/${no}`, {
     method: 'PUT',
