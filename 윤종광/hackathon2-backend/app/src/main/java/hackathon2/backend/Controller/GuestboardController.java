@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +42,26 @@ public class GuestboardController {
     return contentMap;
   }
 
-  @GetMapping("/guestboard/{no}")
-  public Object getGuestboard(@PathVariable int no) {
+  //  @GetMapping("/guestboard/{no}")
+  //  public Object getGuestboard(@PathVariable int no) {
+  //
+  //    Guestboard guestboard = this.guestboardDao.findByNo(no);
+  //
+  //    Map<String, Object> contentMap = new HashMap<>();
+  //
+  //    if (guestboard == null) {
+  //      contentMap.put("status", "failure");
+  //      contentMap.put("data", "해당 번호의 게시글이 없습니다.");
+  //    } else {
+  //      contentMap.put("status", "success");
+  //      contentMap.put("data", guestboard);
+  //    }
+  //
+  //    return contentMap;
+  //  }
+
+  @PutMapping("/guestboard")
+  public Object updateGuestboard(String id, int no, String content) {
 
     Guestboard guestboard = this.guestboardDao.findByNo(no);
 
@@ -53,40 +70,27 @@ public class GuestboardController {
     if (guestboard == null) {
       contentMap.put("status", "failure");
       contentMap.put("data", "해당 번호의 게시글이 없습니다.");
+      return contentMap;
+    } 
+
+    // 좋아요 눌렀을 때
+    if (id != null) {
+      this.guestboardDao.handleClickLike(id, no, guestboard);
+
+      // 수정 버튼으로 수정했을 때 
     } else {
-      contentMap.put("status", "success");
-      contentMap.put("data", guestboard);
+      guestboard.setContent(content);
+      this.guestboardDao.update(guestboard);
+
     }
-
-    return contentMap;
-  }
-
-  @PutMapping("/guestboard/{no}")
-  public Object updateGuestboard(Guestboard guestboard) {
-
-    Map<String, Object> contentMap = new HashMap<>();
-
-    Guestboard old = this.guestboardDao.findByNo(guestboard.getNo());
-
-    if (old == null) {
-      contentMap.put("status", "failure");
-      contentMap.put("data", "해당 번호의 게시글이 없습니다.");
-      return contentMap;
-    } else if (!old.getPassword().equals(guestboard.getPassword())) {
-      contentMap.put("status", "failure");
-      contentMap.put("data", "암호가 맞지 않습니다.");
-      return contentMap;
-    }
-
-    this.guestboardDao.update(guestboard);
 
     contentMap.put("status", "success");
 
     return contentMap;
   }
 
-  @DeleteMapping("/guestboard/{no}")
-  public Object deleteGuestboard(@PathVariable int no, String password) {
+  @DeleteMapping("/guestboard")
+  public Object deleteGuestboard(int no) {
 
     Guestboard guestboard = this.guestboardDao.findByNo(no);
 
@@ -95,10 +99,6 @@ public class GuestboardController {
     if (guestboard == null) {
       contentMap.put("status", "failure");
       contentMap.put("data", "해당 번호의 게시글이 없습니다.");
-      return contentMap;
-    } else if (!guestboard.getPassword().equals(password)) {
-      contentMap.put("status", "failure");
-      contentMap.put("data", "암호가 맞지 않습니다.");
       return contentMap;
     } else {
       this.guestboardDao.delete(guestboard);
@@ -107,6 +107,5 @@ public class GuestboardController {
 
     return contentMap;
   }
-
 
 }

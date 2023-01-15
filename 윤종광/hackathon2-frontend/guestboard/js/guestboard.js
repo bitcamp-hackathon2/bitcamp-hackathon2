@@ -108,3 +108,7 @@ function updateGuestboard(e, dataNo) {
   hideWriteGuestboard();
   requestUpdate(dataNo);
 }
+
+function removeLikeId(userId, dataNo) {
+  
+}

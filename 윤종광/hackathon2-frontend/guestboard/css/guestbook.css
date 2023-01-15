@@ -186,9 +186,8 @@ textarea {
   color: #df0101;
 }
 
-/*
-#likeIcon:hover::after {
+
+.liked::after {
   content: "♥";
   color: #df0101;
 }
-*/

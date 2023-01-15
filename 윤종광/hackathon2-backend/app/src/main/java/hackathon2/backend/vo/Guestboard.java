@@ -1,5 +1,7 @@
 package hackathon2.backend.vo;
 
+import java.util.ArrayList;
+
 public class Guestboard {
   String id;
   String name;
@@ -9,6 +11,7 @@ public class Guestboard {
   String createdDate;
   long createdTime;
   int like;
+  ArrayList<String> likeId;
   String content;
 
   public String getId() {
@@ -58,6 +61,12 @@ public class Guestboard {
   }
   public void setLike(int like) {
     this.like = like;
+  }
+  public ArrayList<String> getLikeId() {
+    return likeId;
+  }
+  public void setLikeId(ArrayList<String> likeId) {
+    this.likeId = likeId;
   }
   public String getContent() {
     return content;

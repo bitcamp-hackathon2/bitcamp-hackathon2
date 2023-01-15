@@ -5,22 +5,22 @@
 
 
     // ${(id === e.id) ? loginIdDelUpBtn : ""}
-const id = 0; // 임시 id
-      
+const id = 'a'; // 임시 id
+
 
 fetch("http://localhost:8080/guestboard")
 .then((response) => response.json())
 .then((obj) => {
   let lis = "";
   for (let e of obj.data) {
-    lis +=
+    lis =
       `<li class="board">
         <div>
           <span class="name">${e.name}</span>
           <span class="id">@${e.id}</span>
           <span class="elapsedTime">${getElapsedTime(e.createdTime)}</span>
           <span class="likeSpan">
-            <span class="likeIcon" class="clickable"></span>
+            <span class="likeIcon clickable ${isLiked(e.id, e.likeId)}" data-no="${e.no}"></span>
             <span class="like"> ${e.like}</span>
           </span>
         </div>
@@ -31,7 +31,7 @@ fetch("http://localhost:8080/guestboard")
             ${loginIdDelUpBtn(e.no)}
           </div>
         </div>
-      </li>`;
+      </li>` + lis;
     }
     document.querySelector('#guestbook-ul').innerHTML = lis;
   
@@ -42,7 +42,11 @@ fetch("http://localhost:8080/guestboard")
     // alert('서버 요청 오류!');
     console.log(err);
   })
-  
+// 
+
+function isLiked(userId, likeId) {
+  return likeId?.includes(userId) ? 'liked' : '';
+}
 
 function requestPost() {
   const content = document.querySelector('#writeArea').value;
@@ -66,7 +70,7 @@ function requestPost() {
 
 function requestUpdate(dataNo) {
   const content = document.querySelector('#writeArea').value;
-  console.log(dataNo);/*
+  
   fetch('http://localhost:8080/guestboard', {
     method: 'PUT',
     headers: {
@@ -81,7 +85,26 @@ function requestUpdate(dataNo) {
     .catch((err) => {
       alert('수정 요청 오류!');
       console.log(err);
-  })*/
+  })
+}
+
+function requestUpdateLike(userId, dataNo) {
+  
+  fetch('http://localhost:8080/guestboard', {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `id=${userId}&no=${dataNo}`
+  })
+    .then((response) => response.json())
+    .then((obj) => {
+      
+    })
+    .catch((err) => {
+      alert('수정 요청 오류!');
+      console.log(err);
+  })
 }
 
 function requestDelete(dataNo) {
@@ -110,20 +133,39 @@ return  `<span id="update-btn" class="clickable clickable-green contentUpdBtn" d
 function workAfterLoad() {
   const contentUpdBtn = document.querySelectorAll('.contentUpdBtn');
   const contentDelBtn = document.querySelectorAll('.contentDelBtn');
+  const likeIcon = document.querySelectorAll('.likeIcon');
   
+  // 좋아요 버튼 클릭 처리
+  likeIcon.forEach(item => item.addEventListener('click', (e) => {
+    let oldLikeCnt = e.target.parentElement.children[1].innerText;
+    let minusLikeCnt = parseInt(oldLikeCnt) - 1;
+    let plusLikeCnt = parseInt(oldLikeCnt) + 1;
+    
+    if (e.target.classList.contains('liked')) {
+      // 좋아요 누른 게시물 처리
+      e.target.classList.remove('liked');
+      e.target.parentElement.children[1].innerText = minusLikeCnt;
+    
+    } else {
+      // 좋아요 안 누른 게시물 처리
+      e.target.classList.add('liked');
+      e.target.parentElement.children[1].innerText = plusLikeCnt;
+    }
+    requestUpdateLike(id, e.target.getAttribute('data-no'));
+  }))
 
   // 게시물 수정 버튼 클릭 처리
-  contentUpdBtn.forEach(e => e.addEventListener('click', () => {
-    const oldContent = e.parentElement.previousElementSibling.innerText;
-    const dataNo = e.getAttribute('data-no');
+  contentUpdBtn.forEach(item => item.addEventListener('click', () => {
+    const oldContent = item.parentElement.previousElementSibling.innerText;
+    const dataNo = item.getAttribute('data-no');
     
     if (writeDiv.classList.contains('writeDivHide')) {
       writeArea.innerText = oldContent;
       writeAreaCalcLen();
       writeDiv.classList.remove('writeDivHide');
-      writeBtn.addEventListener('click', (e) => {
+      writeBtn.onclick = (e) => {
         updateGuestboard(e, dataNo)
-      });
+      }
     }
   }))
 
