@@ -25,7 +25,7 @@
     </tr>
     <tr>
       <th>암호</th>
-      <td><input type="password" name="password" id="f-password"></td>
+      <td><input type="text" name="qpassword" id="f-qpassword"></td>
     </tr>
     <tr>
       <th>작성일</th>
@@ -90,14 +90,14 @@ fetch(`http://localhost:8080/qnas/${no}`)
 document.querySelector('#update-btn').onclick = (e) => {
   var title = encodeURIComponent(document.querySelector('#f-title').value);
   var content = encodeURIComponent(document.querySelector('#f-content').value);
-  var password = document.querySelector('#f-password').value;
+  var qpassword = document.querySelector('#f-qpassword').value;
 
   fetch(`http://localhost:8080/qnas/${no}`, {
     method: 'PUT',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'
     },
-    body: `title=${title}&content=${content}&password=${password}`
+    body: `title=${title}&content=${content}&qpassword=${qpassword}`
   })
   .then((response) => response.json())
   .then((obj) => {
@@ -117,14 +117,14 @@ document.querySelector('#update-btn').onclick = (e) => {
 };
 
 document.querySelector('#delete-btn').onclick = (e) => {
-  var password = prompt('암호를 입력하세요!');
+  var qpassword = prompt('암호를 입력하세요!');
 
   fetch(`http://localhost:8080/qnas/${no}`, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'
     },
-    body: `password=${password}`
+    body: `qpassword=${qpassword}`
   })
   .then((response) => response.json())
   .then((obj) => {

@@ -81,6 +81,7 @@ public class QnaController {
   public Object updateQna(
       @PathVariable int qnaNo,
       @RequestParam(required = false) String title,
+      @RequestParam(required = false) String id,
       @RequestParam(required = false) String content,
       @RequestParam(required = false) String qpassword) {
 
@@ -96,10 +97,11 @@ public class QnaController {
     Qna b = new Qna();
     b.setNo(qnaNo);
     b.setTitle(title);
+    b.setId(old.getId());
     b.setContent(content);
     b.setQpassword(qpassword);
     b.setCreatedDate(old.getCreatedDate());
-    b.setViewCount(old.getViewCount());
+    b.setViewCount(old.getViewCount()+1);
 
     this.qnaDao.update(b);
 
