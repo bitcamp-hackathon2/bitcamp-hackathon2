@@ -18,6 +18,8 @@ public class YoutubeDao {
   private int count;
   private Youtube[] youtubes = new Youtube[SIZE];
 
+
+  
   // Youtube 게시물 생성
   public void insert(Youtube youtube) {
     youtube.setNo(++no);
