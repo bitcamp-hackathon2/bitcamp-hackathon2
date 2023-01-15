@@ -1,12 +1,16 @@
 @font-face {
-  src : url("DungGeunMo.ttf");
-  font-family: 둥근모꼴;
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+* {
+  font-family: 'DungGeunMo';
 }
 
 body {
-  
   font-size: medium;
-  border: 5px solid black;
   margin: 10px;
   position:relative;
   color: white;
@@ -26,7 +30,6 @@ a:visited {
   font-size: 1.2em;
   width: 200px;
   height: 550px;
-  border: 1px solid red;
   position: absolute;
   left: 0px; 
   top: 0px;
@@ -43,7 +46,6 @@ x#menu ul > li {
 
 
 #content {
-  border: 1px solid red;
   margin-left: 200px;
   padding: 10px;
   height: 300px;
@@ -52,7 +54,6 @@ x#menu ul > li {
 
 
 #board {
-  border: 3px solid black;
   height: 140px;
   min-width: 1500px;
   display: inline-block;

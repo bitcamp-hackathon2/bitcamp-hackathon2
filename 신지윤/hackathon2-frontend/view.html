@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+  <div id="menu">
+    <h1>하이텔</h1>
+    <ul>
+      <li class="c1">그래픽 자료실</li>
+      <li class="c1">그때 그시절..☆</li>
+      <li class="c1">뉴스</li>
+      <li class="c1">방명록</li>
+      <li class="c1">관리자</li>
+    </div>
+  
+    <div id="content">
+      <h1>그때 그시절..☆</h1>
+      <h3>새 게시물</h3>
+      <p>
+      90년대는 어땠을까요?<br>
+      90년대의 모습, 영상을 올려주세요.
+      </p>
+      <a href="list.html">게시물 보러가기</a><br>
+      <a href="instruction.html">게시물 작성 방법</a><br>
+      <a href="form.html">게시물 작성하기</a><br>
+      <a href="view.html">게시물 수정하기</a>
+      <p></p>
+
+<form>
+<table border="1">
+  <tbody>
+    <tr>
+      <th>번호</th>
+      <td><input type="text" name="no" id="f-no" readonly></td>
+    </tr>
+    <tr>
+      <th>제목</th>
+      <td><input type="text" name="title" id="f-title"></td>
+    </tr>
+    <tr>
+      <th>아이디</th>
+      <td><input type="text" name="id" id="f-id"></td>
+    </tr>
+    <tr>
+      <th>링크</th>
+      <td><input type="text" name="link" id="f-link"></td>
+    </tr>
+  </tbody>
+</table>
+<button id="update-btn" type="button">변경</button>
+<button id="delete-btn" type="button">삭제</button>
+<button id="list-btn" type="button">목록</button>
+</form>
+
+<script>
+
+var values = location.href.split('?');
+if (values.length != 2) {
+  alert("올바른 페이지 주소가 아닙니다.");
+  throw "no 파라미터 값이 누락되었습니다.";
+} 
+
+var values2 = values[1].split("=");
+if (values2.length != 2 || values2[0] != "no") {
+  alert("올바른 페이지 주소가 아닙니다.");
+  throw "no 파라미터 값이 누락되었습니다.";
+}
+
+var no = parseInt(values2[1]);
+if (isNaN(no)) {
+  alert("게시글 번호가 옳지 않습니다.");
+  throw "no 파라미터 값이 숫자가 아닙니다.";
+}
+
+fetch(`http://localhost:8080/youtubes/${no}`)
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("서버 요청 오류!");
+      console.log(obj.data);
+      return;
+    }
+    document.querySelector("#f-no").value = obj.data.no;
+    document.querySelector("#f-title").value = obj.data.title;
+    document.querySelector('#f-link').value = obj.data.link;
+    document.querySelector("#f-createddate").innerHTML = obj.data.createdDate;
+    document.querySelector("#f-viewcount").innerHTML = obj.data.viewCount;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err)
+  });
+
+document.querySelector('#update-btn').onclick = (e) => {
+  var title = encodeURIComponent(document.querySelector('#f-title').value);
+  var content = encodeURIComponent(document.querySelector('#f-content').value);
+  var link = document.querySelector('#f-link').value;
+
+  fetch(`http://localhost:8080/boards/${no}`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `title=${title}&content=${content}&link=${link}`
+  })
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("게시글 변경 오류!\n" + obj.data);
+      return;
+    }
+
+    location.href = "list.html";
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+
+
+};
+
+document.querySelector('#delete-btn').onclick = (e) => {
+  var password = prompt('암호를 입력하세요!');
+
+  fetch(`http://localhost:8080/youtubes/${no}`, {
+    method: 'DELETE',
+  })
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("게시글 삭제 오류!\n" + obj.data);
+      return;
+    }
+
+    location.href = "list.html";
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+};
+
+document.querySelector('#list-btn').onclick = (e) => {
+  location.href = "list.html";
+};
+
+</script>
+</body>
+</html>
