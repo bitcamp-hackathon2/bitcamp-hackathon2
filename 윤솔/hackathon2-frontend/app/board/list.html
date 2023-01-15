@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/app/board/style.css">
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+</head>
+<body >
+  <nav class="head-nav">
+    <a href="list.html" id="head-nav-home">홈</a>
+    <a href="best-list.html">추천 자료</a>
+    <a href="recent-list.html">최신 자료</a>
+  </nav>
+  <div class="character">
+    <a href="#" target="_blank" rel="noopener" class="mascort">
+      <i class="nes-mario"></i>
+      <p id="balloon" class="nes-balloon from-left" style="color: black;">"어쩌구"</p>
+    </a>
+  </div>
+  <h1 style="text-align: center; padding-top: 50px; font-size: xx-large;" >자료실</h1>
+  <div class="nes-table-responsive" id="main">
+    <a class="nes-btn" id="cancel-btn" href="form.html" style="width: 60px;" >new</a>
+    <table class="nes-table is-bordered is-centered">
+      <thead>
+        <tr>
+          <th>작성일</th>
+          <th>제목</th>
+          <th>조회수</th>
+          <th>답글</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+<script>
+var tbody = document.querySelector("tbody");
+
+fetch('http://localhost:8080/boards')
+  .then((response) => {return response.json();})
+  .then((obj) => {
+    var html = '';
+    for (var b of obj.data) {
+      html += `<tr>
+        <td>${b.createdDate}</td>
+        <td><a href="view.html?no=${b.no}">${b.title} </a></td>
+        <td>${b.viewCount}</td>
+        <td><a href="comment.html?no=${b.no}">${b.comment} </a></td>
+        </tr>\n`;
+    }
+    tbody.innerHTML = html;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });  
+</script>
+</body>
+</html>
