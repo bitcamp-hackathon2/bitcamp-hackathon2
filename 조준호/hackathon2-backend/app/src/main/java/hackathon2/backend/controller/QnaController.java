@@ -27,7 +27,8 @@ public class QnaController {
       @RequestParam(required = false) String id,
       @RequestParam(required = false) String title,
       @RequestParam(required = false) String content,
-      @RequestParam(required = false) String qpassword) {
+      @RequestParam(required = false) String qpassword,
+      @RequestParam(required = false) String answer) {
 
     Qna b = new Qna();
     b.setId(id);
@@ -35,6 +36,7 @@ public class QnaController {
     b.setContent(content);
     b.setQpassword(qpassword);
     b.setCreatedDate(new Date(System.currentTimeMillis()).toString());
+    b.setAnswer(answer);
 
     this.qnaDao.insert(b);
 
@@ -131,4 +133,6 @@ public class QnaController {
 
     return contentMap;
   }
+  
+  
 }

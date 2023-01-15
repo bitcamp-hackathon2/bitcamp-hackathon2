@@ -31,11 +31,16 @@
       <th>조회수</th>
       <td><span id="f-viewcount"></span></td>
     </tr>
+    <tr>
+      <th>답변</th>
+      <td><textarea name="answer" rows="10" cols="50" id="f-answer"></textarea></td>
+    </tr>
   </tbody>
 </table>
 <button id="update-btn" type="button">변경</button>
 <button id="delete-btn" type="button">삭제</button>
 <button id="list-btn" type="button">목록</button>
+<button id="answer-btn" type="button">답변하기</button>
 </form>
 
 <script>
@@ -76,6 +81,7 @@ fetch(`http://localhost:8080/qnas/${no}`)
     document.querySelector("#f-content").value = obj.data.content;
     document.querySelector("#f-createddate").innerHTML = obj.data.createdDate;
     document.querySelector("#f-viewcount").innerHTML = obj.data.viewCount;
+    document.querySelector("#f-answer").value = obj.data.answer;
   })
   .catch((err) => {
     alert("서버 요청 오류!");
@@ -140,6 +146,36 @@ document.querySelector('#delete-btn').onclick = (e) => {
 document.querySelector('#list-btn').onclick = (e) => {
   location.href = "list.html";
 };
+
+document.querySelector('#answer-btn').onclick = (e) => {
+  var answer = encodeURIComponent(document.querySelector('#f-answer').value);
+  
+  
+  var qpassword = prompt('암호를 입력하세요!');
+
+  fetch(`http://localhost:8080/qnas/${no}`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `title=${title}&content=${content}&qpassword=${qpassword}`
+  })
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("게시글 변경 오류!\n" + obj.data);
+      return;
+    }
+
+    location.href = "list.html";
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+
+};
+
 
 </script>
 </body>

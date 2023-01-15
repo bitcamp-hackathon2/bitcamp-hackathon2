@@ -8,6 +8,7 @@ public class Qna {
   private String qpassword;
   private String createdDate;
   private int viewCount;
+  private String answer;
 
   public int getNo() {
     return no;
@@ -51,6 +52,10 @@ public class Qna {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
-
+  public String getAnswer() {
+	  return answer;
+  }
+  public void setAnswer(String answer) {
+	  this.answer = answer;
+  }
 }

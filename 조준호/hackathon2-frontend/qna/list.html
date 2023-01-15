@@ -17,6 +17,7 @@
       <th>작성자ID</th>
       <th>작성일</th>
       <th>조회수</th>
+      <th>답변여부</th>
     </tr>
   </thead>
   <tbody>
@@ -37,6 +38,7 @@ fetch('http://localhost:8080/qnas')
         <td>${b.id}</td>
         <td>${b.createdDate}</td>
         <td>${b.viewCount}</td>
+        <td>${b.answer}</td>
         </tr>\n`;
     }
     tbody.innerHTML = html;
