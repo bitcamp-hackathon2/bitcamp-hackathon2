@@ -148,29 +148,25 @@ textarea {
   line-height: 1em;
 }
 
-#name {
-  
-}
-
-#id {
+.id {
   margin-left: 30px;
   color: #333;
 }
 
-#elapsedTime {
+.elapsedTime {
   margin-left: 30px;
   color: #ccc;
 }
 
-#likeSpan {
+.likeSpan {
   float: right;
 }
 
-#contentMain {
+.contentMain {
   position: relative;
 }
 
-#content {
+.content {
   /* background-color: bisque; */
   display: inline-block;
   width: 670px;
@@ -178,14 +174,14 @@ textarea {
   word-wrap: ;
 }
 
-#del-up-btn {
+.del-up-btn {
   display: inline-block;
   position: absolute;
   right: 0;
   bottom: 0;
 }
 
-#likeIcon::after {
+.likeIcon::after {
   content: "♡";
   color: #df0101;
 }

@@ -7,22 +7,29 @@ const charCount = document.querySelector('#charCount');
 const writeBtn = document.querySelector('#writeBtn');
 
 
+
 writeGuestBoard.addEventListener('click', () => {
   writeAreaCalcLen();
+  writeArea.innerText = "";
   writeDiv.classList.remove("writeDivHide");
+  writeBtn.addEventListener('click', createGuestboard);
 })
 
 writeCloseBtn.addEventListener('click', () => {
   writeDiv.classList.add("writeDivHide");
 })
 
-writeBG.addEventListener('click', () => {
-  const clickWriteCloseBtn = new MouseEvent('click');
-  writeCloseBtn.dispatchEvent(clickWriteCloseBtn);
-})
+// 글쓰기 상태에서 배경 클릭시 창 닫지 않기
+// writeBG.addEventListener('click', hideWriteGuestboard);
 
 writeArea.addEventListener('keyup', writeAreaCalcLen);
 
+
+// 글쓰기 상태에서 배경 클릭시 창 닫지 않기
+function hideWriteGuestboard() {
+  const clickWriteCloseBtn = new MouseEvent('click');
+  writeCloseBtn.dispatchEvent(clickWriteCloseBtn);
+}
 
 function getElapsedTime(createdTime) {
   const nowTime = new Date().getTime();
@@ -63,7 +70,7 @@ function writeAreaCalcLen() {
     if (!writeBtn.classList.contains('charCountRed')) {
       writeBtn.classList.add('charCountRed');
     }
-
+    
     // [남기기] 링크 제거
     if (writeBtn.classList.contains('clickable')) {
       writeBtn.classList.remove('clickable');
@@ -80,7 +87,7 @@ function writeAreaCalcLen() {
     if (writeBtn.classList.contains('charCountRed')) {
       writeBtn.classList.remove('charCountRed');
     }
-
+    
     // [남기기] 링크 활성화
     if (!writeBtn.classList.contains('clickable')) {
       writeBtn.classList.add('clickable');
@@ -93,5 +100,11 @@ function writeAreaCalcLen() {
 }
 
 function createGuestboard() {
+  hideWriteGuestboard();
   requestPost();
+}
+
+function updateGuestboard(e, dataNo) {
+  hideWriteGuestboard();
+  requestUpdate(dataNo);
 }
