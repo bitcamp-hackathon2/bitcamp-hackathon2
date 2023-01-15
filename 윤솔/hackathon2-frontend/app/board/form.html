@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/app/board/style.css">
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+</head>
+<body> 
+  <nav class="head-nav">
+    <a href="list.html" id="head-nav-home">홈</a>
+    <a href="best-list.html">추천 자료</a>
+    <a href="recent-list.html">최신 자료</a>
+  </nav>
+  <h1 style="text-align: center; padding-top: 50px; font-size: xx-large;" >자료 등록</h1>
+  <form id="main">
+    <div class="nes-table-responsive">
+      <table class="nes-table is-bordered is-centered">
+        <tbody id="form-table">
+          <tr>
+            <th>아이디</th>
+            <td><input type="id" name="id" id="f-id" style="width: 100%"></td>
+          </tr>
+          <tr>
+            <th>제목</th>
+            <td><input type="text" name="title" id="f-title" style="width: 100%"></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea name="content" rows="10" cols="50" id="f-content" style="width: 100%"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btns">
+      <button type="button" class="nes-btn is-primary" id="add-btn">등록</button>
+      <a class="nes-btn" href="list.html" id="cancel-btn">취소</a>
+    </div>
+  </form>
+<script>
+
+document.querySelector('#add-btn').onclick = (e) => {
+  var title = encodeURIComponent(document.querySelector('#f-title').value);
+  var content = encodeURIComponent(document.querySelector('#f-content').value);
+  var id = document.querySelector('#f-id').value;
+
+  // console.log(`title=${title}&content=${content}&id=${id}`);
+  fetch('http://localhost:8080/boards', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `title=${title}&content=${content}&id=${id}`
+  })
+  .then((response) => {return response.json();})
+  .then((obj) => {
+    location.href = "list.html";
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+};
+
+</script>
+</body>
+</html>
