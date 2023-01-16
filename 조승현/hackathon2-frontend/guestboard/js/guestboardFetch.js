@@ -3,7 +3,7 @@ let username = decodeURI(all.split("=")[1].split(",")[0]);
 let id  = all.split("=")[1].split(",")[1]
 
 
-fetch("http://localhost:8080/guestboard")
+fetch("http://192.168.0.7:8080/guestboard")
 .then((response) => response.json())
 .then((obj) => {
 
@@ -55,7 +55,7 @@ function isLiked(userId, likeId) {
 function requestPost() {
   const content = document.querySelector('#writeArea').value;
 
-  fetch('http://localhost:8080/guestboard', {
+  fetch('http://192.168.0.7:8080/guestboard', {
     method: 'POST',
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
@@ -75,7 +75,7 @@ function requestPost() {
 function requestUpdate(dataNo) {
   const content = document.querySelector('#writeArea').value;
   
-  fetch('http://localhost:8080/guestboard', {
+  fetch('http://192.168.0.7:8080/guestboard', {
     method: 'PUT',
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
@@ -94,7 +94,7 @@ function requestUpdate(dataNo) {
 
 function requestUpdateLike(userId, dataNo) {
   
-  fetch('http://localhost:8080/guestboard', {
+  fetch('http://192.168.0.7:8080/guestboard', {
     method: 'PUT',
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
@@ -112,7 +112,7 @@ function requestUpdateLike(userId, dataNo) {
 }
 
 function requestDelete(dataNo) {
-  fetch('http://localhost:8080/guestboard', {
+  fetch('http://192.168.0.7:8080/guestboard', {
     method: 'DELETE',
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
