@@ -71,7 +71,7 @@
         }else if(dreg == 3){
           location.href = `?${all}`;
         }else if(dreg == 4){
-          if(all.split("=")[1].split(",")[1] == "admin"){
+          if(all.split("=")[1].split(",")[1].indexOf("admin") >= 0){
             location.href = `admin-info.html?${all}`;
           }else{
             location.href = `user-info.html?${all}`;
