@@ -27,16 +27,15 @@
     </p>
     <a href="instruction.html">게시물 작성 방법</a><br>
     <a href="form.html">게시물 작성하기</a><br>
-    <a href="view.html">게시물 수정하기</a>
     <p></p>
 
     <table border="1">
       <thead>
         <tr>
           <th>번호</th>
+          <th>미리보기</th>
           <th>제목</th>
           <th>아이디</th>
-          <th>링크</th>
           <th>작성일</th>
           <th>조회수</th>
         </tr>
@@ -57,9 +56,9 @@
       for (var y of obj.data) {
         html += `<tr>
           <th>${y.no}</th>
-          <th><a href="view.html?no=${y.no}">${y.title} </a></th>
-          <th>${y.id}</th>
-          <th><a href="${y.link}">${y.link}</a></th>
+          <th><img src="${y.thumbnail}" width = "100"></th>
+          <th><a href="${y.link}">${y.title} </a></th>
+          <th><a href="view.html?no=${y.no}">${y.id}</th>
           <th>${y.createdDate}</th>
           <th>${y.viewCount}</th>
           </tr>\n`;
@@ -79,8 +78,7 @@
 
 
 
-<!--  <div id="board">
-    <img src="https://i.ytimg.com/vi/chI0nkP07-M/maxresdefault.jpg">
-    <h2>[모아보기] 웬만한 악과 깡으로는 살아남기 힘들었던 90년대 레전드 영상｜크랩</h2>
-    <p>크랩 효자 콘텐츠인 90년대 뉴트로 콘텐츠! 많고 많은 레전드 영상 중 찐 레전드만 모아봤습니다. 핸드폰과 유튜브만 준비해 주시죠. 제대로 모시겠습니다.</p>
-  </div> -->
+<!--
+  제목 클릭하면 이동
+  작성자 클릭하면 수정
+ -->

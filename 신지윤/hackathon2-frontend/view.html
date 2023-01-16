@@ -28,7 +28,6 @@
       <a href="list.html">게시물 보러가기</a><br>
       <a href="instruction.html">게시물 작성 방법</a><br>
       <a href="form.html">게시물 작성하기</a><br>
-      <a href="view.html">게시물 수정하기</a>
       <p></p>
 
 <form>
@@ -37,6 +36,10 @@
     <tr>
       <th>번호</th>
       <td><input type="text" name="no" id="f-no" readonly></td>
+    </tr>
+    <tr>
+      <th>미리보기</th>
+      <td><input type="text" name="thumbnail" id="f-thumbnail"></td>
     </tr>
     <tr>
       <th>제목</th>
@@ -86,6 +89,7 @@ fetch(`http://localhost:8080/youtubes/${no}`)
       return;
     }
     document.querySelector("#f-no").value = obj.data.no;
+    document.querySelector("#f-thumbnail").value = obj.data.thumbnail;
     document.querySelector("#f-title").value = obj.data.title;
     document.querySelector('#f-link').value = obj.data.link;
     document.querySelector("#f-createddate").innerHTML = obj.data.createdDate;
@@ -97,8 +101,8 @@ fetch(`http://localhost:8080/youtubes/${no}`)
   });
 
 document.querySelector('#update-btn').onclick = (e) => {
+  var thumbnail = document.querySelector('#f-thumbnail').value;
   var title = encodeURIComponent(document.querySelector('#f-title').value);
-  var content = encodeURIComponent(document.querySelector('#f-content').value);
   var link = document.querySelector('#f-link').value;
 
   fetch(`http://localhost:8080/boards/${no}`, {
@@ -106,7 +110,7 @@ document.querySelector('#update-btn').onclick = (e) => {
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'
     },
-    body: `title=${title}&content=${content}&link=${link}`
+    body: `thumbnail=${thumbnail}title=${title}&link=${link}`
   })
   .then((response) => response.json())
   .then((obj) => {

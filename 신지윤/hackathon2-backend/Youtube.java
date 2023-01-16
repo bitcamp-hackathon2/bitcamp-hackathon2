@@ -11,6 +11,7 @@ public class Youtube {
 	private String createdDate;	// Youtube 게시물 작성일
 	private int viewCount;	// Youtue 게시물 조회수
 	private String link;	// Youtube 링크
+	private String thumbnail;	// Youtube 썸네일 링크
 	
 	// Youtube 썸네일
 	public int getNo() {
@@ -60,6 +61,12 @@ public class Youtube {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 }
 
