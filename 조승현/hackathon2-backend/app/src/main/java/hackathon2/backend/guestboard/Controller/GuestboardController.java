@@ -1,4 +1,4 @@
-package hackathon2.backend.Controller;
+package hackathon2.backend.guestboard.Controller;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import hackathon2.backend.dao.GuestboardDao;
-import hackathon2.backend.vo.Guestboard;
+import hackathon2.backend.guestboard.dao.GuestboardDao;
+import hackathon2.backend.guestboard.vo.Guestboard;
 
 @RestController
 public class GuestboardController {
 
-  //초기 데이터 생성을 위한 변수
+  // 초기 데이터 생성을 위한 변수
   boolean isFirstLoad = true;
 
   @Autowired GuestboardDao guestboardDao;

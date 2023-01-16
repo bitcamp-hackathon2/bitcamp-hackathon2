@@ -1,10 +1,3 @@
-// let all = location.href.split("?")[1];
-// let name = all.split("=")[1].split(",")[0];
-// let id = all.split("=")[1].split(",")[1];
-
-
-
-    // ${(id === e.id) ? loginIdDelUpBtn : ""}
 let all = location.href.split("?")[1];
 let username = decodeURI(all.split("=")[1].split(",")[0]);
 let id  = all.split("=")[1].split(",")[1]
@@ -26,7 +19,7 @@ fetch("http://localhost:8080/guestboard")
               <span class="id">@${e.id}</span>
               <span class="elapsedTime">${getElapsedTime(e.createdTime)}</span>
               <span class="likeSpan">
-                <span class="likeIcon clickable ${isLiked(e.id, e.likeId)}" data-no="${e.no}"></span>
+                <span class="likeIcon clickable ${isLiked(id, e.likeId)}" data-no="${e.no}"></span>
                 <span class="like"> ${e.like}</span>
               </span>
             </div>
@@ -41,13 +34,13 @@ fetch("http://localhost:8080/guestboard")
         
         li.innerHTML = liContent;
         ul.appendChild(li);
-      }, -(i-obj.data.length)*500);
+      }, -(i-obj.data.length)*250);
     
   };
   
 setTimeout(() => {
   workAfterLoad();
-}, obj.data.length*500+500);
+}, (obj.data.length+1)*250);
   })
   .catch((err) => {
     // alert('서버 요청 오류!');
@@ -136,9 +129,13 @@ function requestDelete(dataNo) {
   })
 }
 
-const loginIdDelUpBtn = function (GuestboardNo) {
-return  `<span id="update-btn" class="clickable clickable-green contentUpdBtn" data-no="${GuestboardNo}">[수정]</span>
-  <span id="delete-btn" class="clickable clickable-green contentDelBtn" data-no="${GuestboardNo}">[삭제]</span>`;
+function loginIdDelUpBtn(userId, GuestboardNo) {
+  console.log(userId)  
+  if (id === userId || id === 'admin1'  || id === 'admin2'  || id === 'admin3'  || id === 'admin4'  || id === 'admin5') {
+    return  `<span id="update-btn" class="clickable clickable-green contentUpdBtn" data-no="${GuestboardNo}">[수정]</span>
+    <span id="delete-btn" class="clickable clickable-green contentDelBtn" data-no="${GuestboardNo}">[삭제]</span>`;
+  }
+  return "";
 }
 
 function workAfterLoad() {

@@ -1,19 +1,13 @@
-// let all = location.href.split("?")[1];
-// let name = all.split("=")[1].split(",")[0];
-// let id = all.split("=")[1].split(",")[1];
-
-
-
-    // ${(id === e.id) ? loginIdDelUpBtn : ""}
-const id = 'a'; // 임시 id
+let all = location.href.split("?")[1];
+let username = decodeURI(all.split("=")[1].split(",")[0]);
+let id  = all.split("=")[1].split(",")[1]
 
 
 fetch("http://localhost:8080/guestboard")
 .then((response) => response.json())
 .then((obj) => {
 
-  for (let i = 0; i <= obj.data.length; i++) {
-    (function () {
+  for (let i = 0; i < obj.data.length; i++) {
       setTimeout(() => {
         const e = obj.data[i];
         const ul = document.querySelector('#guestbook-ul');
@@ -25,7 +19,7 @@ fetch("http://localhost:8080/guestboard")
               <span class="id">@${e.id}</span>
               <span class="elapsedTime">${getElapsedTime(e.createdTime)}</span>
               <span class="likeSpan">
-                <span class="likeIcon clickable ${isLiked(e.id, e.likeId)}" data-no="${e.no}"></span>
+                <span class="likeIcon clickable ${isLiked(id, e.likeId)}" data-no="${e.no}"></span>
                 <span class="like"> ${e.like}</span>
               </span>
             </div>
@@ -33,22 +27,20 @@ fetch("http://localhost:8080/guestboard")
             <div class="contentMain">
               <div class="content">${e.content}</div>
               <div class="del-up-btn">
-                ${loginIdDelUpBtn(e.no)}
+                ${loginIdDelUpBtn(e.id, e.no)}
               </div>
             </div>
           `;
         
         li.innerHTML = liContent;
         ul.appendChild(li);
-
-      }, -(i-obj.data.length)*500);
-    })(i);
-  }
+      }, -(i-obj.data.length)*250);
+    
+  };
   
-
-  
-    workAfterLoad();
-
+setTimeout(() => {
+  workAfterLoad();
+}, (obj.data.length+1)*250);
   })
   .catch((err) => {
     // alert('서버 요청 오류!');
@@ -68,11 +60,11 @@ function requestPost() {
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
     },
-    body: `id=${id}&content=${content}`
+    body: `id=${id}&content=${content}&name=${username}`
   })
     .then((response) => response.json())
     .then((obj) => {
-      location.href = 'guestboard.html';
+      location.href = 'guestboard.html?'+all;
     })
     .catch((err) => {
       alert('글쓰기 요청 오류!');
@@ -92,7 +84,7 @@ function requestUpdate(dataNo) {
   })
     .then((response) => response.json())
     .then((obj) => {
-      location.href = 'guestboard.html';
+      location.href = 'guestboard.html?'+all;
     })
     .catch((err) => {
       alert('수정 요청 오류!');
@@ -129,7 +121,7 @@ function requestDelete(dataNo) {
   })
     .then((response) => response.json())
     .then((obj) => {
-      location.href = 'guestboard.html';
+      location.href = 'guestboard.html?'+all;
     })
     .catch((err) => {
       alert('삭제 요청 오류!');
@@ -137,9 +129,13 @@ function requestDelete(dataNo) {
   })
 }
 
-const loginIdDelUpBtn = function (GuestboardNo) {
-return  `<span id="update-btn" class="clickable clickable-green contentUpdBtn" data-no="${GuestboardNo}">[수정]</span>
-  <span id="delete-btn" class="clickable clickable-green contentDelBtn" data-no="${GuestboardNo}">[삭제]</span>`;
+function loginIdDelUpBtn(userId, GuestboardNo) {
+  console.log(userId)  
+  if (id === userId || id === 'admin1'  || id === 'admin2'  || id === 'admin3'  || id === 'admin4'  || id === 'admin5') {
+    return  `<span id="update-btn" class="clickable clickable-green contentUpdBtn" data-no="${GuestboardNo}">[수정]</span>
+    <span id="delete-btn" class="clickable clickable-green contentDelBtn" data-no="${GuestboardNo}">[삭제]</span>`;
+  }
+  return "";
 }
 
 function workAfterLoad() {
@@ -168,6 +164,7 @@ function workAfterLoad() {
 
   // 게시물 수정 버튼 클릭 처리
   contentUpdBtn.forEach(item => item.addEventListener('click', () => {
+    console.log(14)
     const oldContent = item.parentElement.previousElementSibling.innerText;
     const dataNo = item.getAttribute('data-no');
     

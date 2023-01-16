@@ -48,7 +48,7 @@
       id = $(".bit-login-id").val();
       password = $(".bit-login-password").val();
       if(id.length > 0 && password.length > 7){
-        fetch("http://192.168.0.7:8080/login", {
+        fetch("http://localhost:8080/login", {  // http://192.168.0.7:8080/login
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -79,7 +79,7 @@
       etc = $(".bit-sign-etc").val();
       
       if(namechecked && idchecked && password.length > 7 && etc.length >= 0){
-        fetch("http://192.168.0.7:8080/insert", {
+        fetch("http://localhost:8080/insert", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -118,7 +118,7 @@
     $(".bit-sign-checkid").click(() => {
       id = $(".bit-sign-id").val();
       if(id.length > 0 && id.length < 10) {
-        fetch("http://192.168.0.7:8080/checkid", {
+        fetch("http://localhost:8080/checkid", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -157,7 +157,7 @@
       }
       console.log(strint)
       if(strint > 0 && strint < 17) {
-        fetch("http://192.168.0.7:8080/checkname", {
+        fetch("http://localhost:8080/checkname", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"

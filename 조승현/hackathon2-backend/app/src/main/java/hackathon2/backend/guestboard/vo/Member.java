@@ -1,4 +1,4 @@
-package hackathon2.backend.vo;
+package hackathon2.backend.guestboard.vo;
 
 public class Member {
   String id;
