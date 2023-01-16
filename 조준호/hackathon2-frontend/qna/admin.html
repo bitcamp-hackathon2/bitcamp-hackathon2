@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>QnA</title>
+  <title>관리자등록</title>
   <style>
     table {
       width: 600px;
@@ -28,25 +28,17 @@
     </div>
 
     <div id="content">
-      <h1>QnA</h1>
+      <h1>관리자 등록</h1>
       <form>
       <table border="1">
         <tbody>
           <tr>
-            <th>ID</th>
-            <td><input type="text1" name="id" id="f-id" style="width:90%; height:80%; font-size:20px;"></td>
+            <th>관리자ID</th>
+            <td><input type="text1" name="aid" id="f-aid" style="width:90%; height:80%; font-size:20px;"></td>
           </tr>
           <tr>
-            <th>제목</th>
-            <td><input type="text2" name="title" id="f-title" style="width:90%; height:80%; font-size:20px;"></td>
-          </tr>
-          <tr>
-            <th>내용</th>
-            <td><textarea name="content" rows="10" cols="60" id="f-content" style="width:90%; height:80%; font-size:20px;"></textarea></td>
-          </tr>
-          <tr>
-            <th>암호</th>
-            <td><input type="text3" name="qpassword"  id="f-qpassword" style="width:90%; height:80%; font-size:20px;"></td>
+            <th>관리자 암호</th>
+            <td><input type="text3" name="apassword"  id="f-apassword" style="width:90%; height:80%; font-size:20px;"></td>
           </tr>
         </tbody>
       </table>
@@ -59,24 +51,22 @@
 
 <script>
 document.querySelector('#add-btn').onclick = (e) => {
-  var id = encodeURIComponent(document.querySelector('#f-id').value);
-  var title = encodeURIComponent(document.querySelector('#f-title').value);
-  var content = encodeURIComponent(document.querySelector('#f-content').value);
-  var qpassword = document.querySelector('#f-qpassword').value;
+  var aid = encodeURIComponent(document.querySelector('#f-aid').value);
+  var apassword = document.querySelector('#f-apassword').value;
   
 
-  // console.log(`title=${title}&content=${content}&password=${password}`);
+  console.log(`aid=${aid}&apassword=${apassword}`);
   fetch('http://localhost:8080/qnas', {
     method: 'POST',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'
     },
-    body: `id=${id}&title=${title}&content=${content}&qpassword=${qpassword}`
+    body: `aid=${aid}&apassword=${apassword}`
   })
-  .then((response) => {return response.json();})
-  .then((obj) => {
-    location.href = "list.html";
-  })
+  // .then((response) => {return response.json();})
+  // .then((obj) => {
+  //   location.href = "view.html";
+  // })
   .catch((err) => {
     alert("서버 요청 오류!");
     console.log(err);

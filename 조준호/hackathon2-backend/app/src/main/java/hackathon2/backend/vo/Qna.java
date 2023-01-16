@@ -8,7 +8,29 @@ public class Qna {
   private String qpassword;
   private String createdDate;
   private int viewCount;
+  private boolean answer;
+  private String aid;
 
+  public String getAid() {
+    return aid;
+  }
+  public void setAid(String aid) {
+    this.aid = aid;
+  }
+  public String getApassword() {
+    return apassword;
+  }
+  public void setApassword(String apassword) {
+    this.apassword = apassword;
+  }
+  private String apassword;
+
+  public boolean getAnswer() {
+    return answer;
+  }
+  public void setAnswer(boolean answer) {
+    this.answer = answer;
+  }
   public int getNo() {
     return no;
   }
@@ -51,6 +73,4 @@ public class Qna {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
-
 }

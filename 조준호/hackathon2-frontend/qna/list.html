@@ -4,24 +4,49 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>QnA</title>
+  <style>
+    table {
+      width: 600px;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #666666;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-<h1>질문목록</h1>
-<a href="form.html">질문등록</a>
-<table border="1">
-  <thead>
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>작성자ID</th>
-      <th>작성일</th>
-      <th>조회수</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
+  <div id="menu">
+    <h1>하이텔</h1>
+    <ul>
+      <li class="c1">그래픽 자료실</li>
+      <li class="c1">그때 그시절..☆</li>
+      <li class="c1">뉴스</li>
+      <li class="c1">방명록</li>
+      <li class="c1">관리자</li>
+    </div>
+  
+    <div id="content">
+      <h1>QnA</h1>
+      <a href="form.html">질문하기</a>
+      <a href="admin.html">관리자등록</a>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자ID</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th>답변여부</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
 
 <script>
 var tbody = document.querySelector("tbody");
@@ -37,6 +62,7 @@ fetch('http://localhost:8080/qnas')
         <td>${b.id}</td>
         <td>${b.createdDate}</td>
         <td>${b.viewCount}</td>
+        <td>${b.answer ? 'O' : 'X'}</td>
         </tr>\n`;
     }
     tbody.innerHTML = html;
@@ -44,7 +70,7 @@ fetch('http://localhost:8080/qnas')
   .catch((err) => {
     alert("서버 요청 오류!");
     console.log(err);
-  });  
+  });
 </script>
 </body>
 </html>

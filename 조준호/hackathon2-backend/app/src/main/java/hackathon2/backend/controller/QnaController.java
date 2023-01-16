@@ -27,7 +27,10 @@ public class QnaController {
       @RequestParam(required = false) String id,
       @RequestParam(required = false) String title,
       @RequestParam(required = false) String content,
-      @RequestParam(required = false) String qpassword) {
+      @RequestParam(required = false) String qpassword,
+      @RequestParam(required = false) String aid,
+      @RequestParam(required = false) String apassword,
+      @RequestParam(required = false) boolean answer) {
 
     Qna b = new Qna();
     b.setId(id);
@@ -35,6 +38,9 @@ public class QnaController {
     b.setContent(content);
     b.setQpassword(qpassword);
     b.setCreatedDate(new Date(System.currentTimeMillis()).toString());
+    b.setAnswer(answer);
+    b.setAid(aid);
+    b.setApassword(apassword);
 
     this.qnaDao.insert(b);
 
@@ -81,6 +87,7 @@ public class QnaController {
   public Object updateQna(
       @PathVariable int qnaNo,
       @RequestParam(required = false) String title,
+      @RequestParam(required = false) String id,
       @RequestParam(required = false) String content,
       @RequestParam(required = false) String qpassword) {
 
@@ -96,10 +103,11 @@ public class QnaController {
     Qna b = new Qna();
     b.setNo(qnaNo);
     b.setTitle(title);
+    b.setId(old.getId());
     b.setContent(content);
     b.setQpassword(qpassword);
     b.setCreatedDate(old.getCreatedDate());
-    b.setViewCount(old.getViewCount());
+    b.setViewCount(old.getViewCount()+1);
 
     this.qnaDao.update(b);
 
@@ -129,4 +137,6 @@ public class QnaController {
 
     return contentMap;
   }
+
+
 }
