@@ -27,7 +27,7 @@ fetch("http://192.168.0.7:8080/guestboard")
             <div class="contentMain">
               <div class="content">${e.content}</div>
               <div class="del-up-btn">
-                ${loginIdDelUpBtn(e.no)}
+                ${loginIdDelUpBtn(e.id, e.no)}
               </div>
             </div>
           `;

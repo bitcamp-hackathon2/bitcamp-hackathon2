@@ -58,7 +58,7 @@ document.querySelector('#add-btn').onclick = (e) => {
   
 
   console.log(`aid=${aid}&apassword=${apassword}`);
-  fetch('http://localhost:8080/qnas', {
+  fetch('http://192.168.0.7:8080/qnas', {
     method: 'POST',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'

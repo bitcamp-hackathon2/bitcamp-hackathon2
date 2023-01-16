@@ -76,7 +76,7 @@
   let id = all.split("=")[1].split(",")[1]
   var tbody = document.querySelector("tbody");
   
-  fetch('http://localhost:8080/youtubes')
+  fetch('http://192.168.0.7:8080/youtubes')
     .then((response) => {return response.json();})
     .then((obj) => {
       var html = '';

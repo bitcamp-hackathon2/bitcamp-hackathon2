@@ -72,7 +72,7 @@
     throw "no 파라미터 값이 숫자가 아닙니다.";
   }
 
-fetch(`http://localhost:8080/qnas/${no}`)
+fetch(`http://192.168.0.7:8080/qnas/${no}`)
   .then((response) => response.json())
   .then((obj) => {
     if (obj.status == "failure") {
@@ -97,7 +97,7 @@ document.querySelector('#update-btn').onclick = (e) => {
   
   var qpassword = prompt('암호를 입력하세요!');
 
-  fetch(`http://localhost:8080/qnas/${no}`, {
+  fetch(`http://192.168.0.7:8080/qnas/${no}`, {
     method: 'PUT',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'
@@ -124,7 +124,7 @@ document.querySelector('#update-btn').onclick = (e) => {
 document.querySelector('#delete-btn').onclick = (e) => {
   var qpassword = prompt('암호를 입력하세요!');
 
-  fetch(`http://localhost:8080/qnas/${no}`, {
+  fetch(`http://192.168.0.7:8080/qnas/${no}`, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'

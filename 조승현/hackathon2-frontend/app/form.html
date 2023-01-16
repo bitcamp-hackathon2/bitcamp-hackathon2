@@ -12,7 +12,7 @@
     <a id="head-nav-home" class="go-0">홈</a>
     <a id="aa" class="go-2">방명록</a>
     <a id="aa" class="go-4">그때 그 시절..☆</a>
-    <a id="aa" class="go-5">뉴스</a>
+    <a id="aa" class="go-5">Qna</a>
   </nav>
   <form id="main">
     <div class="nes-table-responsive">
@@ -50,7 +50,7 @@ document.querySelector('#add-btn').onclick = (e) => {
   var content = encodeURIComponent(document.querySelector('#f-content').value);
   var password = document.querySelector('#f-password').value; // name?
 
-  fetch('http://localhost:8080/boards', {
+  fetch('http://192.168.0.7:8080/boards', {
     method: 'POST',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded'

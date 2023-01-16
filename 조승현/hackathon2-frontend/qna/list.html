@@ -52,7 +52,7 @@ var tbody = document.querySelector("tbody");
 let all = location.href.split("?")[1];
     let name = all.split("=")[1].split(",")[0]
     let id = all.split("=")[1].split(",")[1]
-fetch('http://localhost:8080/qnas')
+fetch('http://192.168.0.7:8080/qnas')
   .then((response) => {return response.json();})
   .then((obj) => {
     var html = '';
