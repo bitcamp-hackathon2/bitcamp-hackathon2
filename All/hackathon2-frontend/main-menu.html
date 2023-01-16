@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>텔텔텔</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+  <div class="background">
+    <div class="title">
+      <span>하이텔</span>
+    </div>
+    <div class="body">
+      <div class ="contents">
+        <div class="contents-title">
+          <span>Contents - LIST</span>
+        </div>
+        <div class="contents-contents">
+          <ul>
+            <li class="checked">1. &nbsp라이브 채팅</li>
+            <li>2. &nbsp방명록</li>
+            <li>3. &nbsp그 때 그시절..☆</li>
+            <li>4. &nbsp회원 관리/내 정보</li>
+            <li>5. &nbspQnA</li>
+            <li>6. &nbsp이것 저것 공유</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="help">
+        <span>항목 변경은 키보드 (↑)(↓) 을 사용하고, 선택은 엔터 Enter 를 누르시면 됩니까</span>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    let all = location.href.split("?")[1];
+    let dreg = 1;
+    $(document).on("keydown", (e) => {
+      if(e.keyCode == 38){
+        for(let i = 0; i < $("li").length; i++) {
+          if($("li")[i].className == "checked"){
+            if(i > 0) {
+              $("li")[i].className = "";
+              $("li")[i-1].className = "checked";
+              dreg = i;
+            }
+            break;
+          }
+        }
+      }else if(e.keyCode == 40){
+        for(let i = 0; i < $("li").length; i++) {
+          if($("li")[i].className == "checked"){
+            if(i < $("li").length-1) {
+              $("li")[i].className = "";
+              $("li")[i+1].className = "checked";
+              dreg = i+2;
+            }
+            break;
+          }
+        }
+      }
+    })
+    $(document).on("keydown", (e) => {
+      if(e.keyCode == 13) {
+        if(dreg == 1){
+          location.href = `live.html?${all}`;
+        }else if(dreg == 2){
+          location.href = `./guestboard/guestboard.html?${all}`;
+        }else if(dreg == 3){
+          location.href = `you/list.html?${all}`;
+        }else if(dreg == 4){
+          if(all.split("=")[1].split(",")[1].indexOf("admin") >= 0){
+            location.href = `admin-info.html?${all}`;
+          }else{
+            location.href = `user-info.html?${all}`;
+          }
+        }else if(dreg == 5){
+          location.href = `qna/list.html?${all}`;
+        }else if(dreg == 6){
+          location.href = `app/list.html?${all}`;
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

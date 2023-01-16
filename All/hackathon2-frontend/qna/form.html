@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>QnA</title>
+  <style>
+    table {
+      width: 600px;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #666666;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <h1>하이텔</h1>
+    <ul>
+      <li class="go-1">라이브채팅</li>
+      <li class="go-2">방명록</li>
+      <li class="go-3">그 때 그시절..☆</li>
+      <li class="go-6">이것 저것 공유</li>
+    </div>
+
+    <div id="content">
+      <h1>QnA</h1>
+      <form>
+      <table border="1">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td><input type="text1" name="id" id="f-id" style="width:90%; height:80%; font-size:20px;"></td>
+          </tr>
+          <tr>
+            <th>제목</th>
+            <td><input type="text2" name="title" id="f-title" style="width:90%; height:80%; font-size:20px;"></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea name="content" rows="10" cols="60" id="f-content" style="width:90%; height:80%; font-size:20px;"></textarea></td>
+          </tr>
+          <tr>
+            <th>암호</th>
+            <td><input type="text3" name="qpassword"  id="f-qpassword" style="width:90%; height:80%; font-size:20px;"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-btn">
+        <button id="add-btn" type="button">등록</button>
+        <button id="cancel-btn" type="button">취소</button>
+      </div>
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+  let all = location.href.split("?")[1];
+    let name = all.split("=")[1].split(",")[0]
+    let id = all.split("=")[1].split(",")[1]
+document.querySelector('#add-btn').onclick = (e) => {
+  var id = encodeURIComponent(document.querySelector('#f-id').value);
+  var title = encodeURIComponent(document.querySelector('#f-title').value);
+  var content = encodeURIComponent(document.querySelector('#f-content').value);
+  var qpassword = document.querySelector('#f-qpassword').value;
+  
+
+  // console.log(`title=${title}&content=${content}&password=${password}`);
+  fetch('http://192.168.0.7:8080/qnas', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `id=${id}&title=${title}&content=${content}&qpassword=${qpassword}`
+  })
+  .then((response) => {return response.json();})
+  .then((obj) => {
+    location.href = `list.html?${all}`;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+};
+
+document.querySelector('#cancel-btn').onclick = (e) => {
+  location.href = `list.html?${all}`;
+};
+$(".go-1").click(() => {
+      location.href = `../live.html?${all}`;
+    })
+    $(".go-2").click(() => {
+      location.href = `../guestboard/guestboard.html?${all}`;
+    })
+    $(".go-3").click(() => {
+      location.href = `../you/list.html?${all}`;
+    })
+    $(".go-6").click(() => {
+      location.href = `../app/list.html?${all}`;
+    })
+</script>
+</body>
+</html>

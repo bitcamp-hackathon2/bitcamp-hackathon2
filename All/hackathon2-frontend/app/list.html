@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+  <title>정보</title>
+</head>
+<body >
+  <nav class="head-nav">
+    <a id="head-nav-home" class="go-0">홈</a>
+    <a id="aa" class="go-2">방명록</a>
+    <a id="aa" class="go-4">그때 그 시절..☆</a>
+    <a id="aa" class="go-5">Qna</a>
+  </nav>
+  <div class="blanktop"></div>
+  <div class="container">
+    <div class="blankleft"></div>
+    <div class="title">
+      <span>이것저것공유</span>
+    </div>
+    <div class="blankright"></div>
+  </div>
+  <!--<div class="character">
+    <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="mascort">
+      <p id="balloon" class="nes-balloon from-left" style="color: black;"> 
+        완전ㅂĿㄱr워~~ <br>Be§t정보 볼つㅓzl?ㅎㅎ</p>
+    </a>
+  </div>-->
+  <div class="threetables-container">
+    <div class="nes-table-responsive" id="main">
+      <p><a id="aaa" style="font-size: larger; color: white;">정보 등록</a></p>
+      <table class="nes-table is-bordered is-centered">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>작성일</th>
+            <th>별명</th>
+            <th>제목</th>
+            <th>조회수</th>
+          </tr>
+          <tr>
+            <td>정보예시</td>
+            <td>2023-01-16</td>
+            <td>관리자</td>
+            <td><a class="hell">헬스 꿀팁 총정리</a></td>
+            <td>351</td>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+let all = location.href.split("?")[1];
+let name = all.split("=")[1].split(",")[0]
+let id  = all.split("=")[1].split(",")[1]
+var tbody = document.querySelector("tbody");
+
+fetch('http://192.168.0.7:8080/boards')
+  .then((response) => {return response.json();})
+  .then((obj) => {
+    console.log(134)
+    var html = '';
+    for (var b of obj.data) {
+      html += `<tr>
+        <td>${b.no}</td>
+        <td>${b.createdDate}</td>
+        <td>${b.name}</td>
+        <td><a href="view.html?no=${b.no}&${all}">${b.title}</a></td>
+        <td>${3}</td>
+        </tr>\n`;
+    }
+    tbody.innerHTML = html;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!1");
+    console.log(err);
+  }); 
+  $("#aaa").click(() => {
+    location.href = `form.html?${all}`;
+  })
+  $(".go-0").click(() => {
+    location.href = `../main-menu.html?${all}`;
+  })
+  $(".go-2").click(() => {
+    location.href = `../guestboard/guestboard.html?${all}`;
+  })
+  $(".go-4").click(() => {
+    location.href = `?${all}`;
+  })
+  $(".go-5").click(() => {
+    location.href = `?${all}`;
+  })
+  $(".hell").click(() => {
+    location.href = `post.html?${all}`;
+  })
+</script>
+</body>
+</html>

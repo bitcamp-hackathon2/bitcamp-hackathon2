@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+
+  <div id="menu">
+  <h1>하이텔</h1>
+  <ul>
+    <li class="go-1">라이브채팅</li>
+    <li class="go-2">방명록</li>
+    <li class="go-5">뉴스</li>
+    <li class="go-6">이것 저것 공유</li>
+  </div>
+
+  <div id="content">
+    <h1>그때 그시절..☆</h1>
+    <p>
+    90년대는 어땠을까요?<br>
+    90년대의 모습, 영상을 모아봤습니다.
+    </p>
+    <a id="list">게시물 보러가기</a><br>
+    <a id="form">게시물 작성하기</a><br>
+    <p></p>
+    <p>------------------------------------------------------------</p>
+    <p>1. 게시물 작성하기를 클릭합니다.<br><br><img src="1.PNG" width="400px"></p>
+    <p>2. 작성 창을 확인 후, 미리보기 사진을 추출하기 위해<br>&nbsp;&nbsp;미리보기 사진 주소 추출하기를 클릭합니다.<br><br><img src="2.PNG" width="400px"></p>
+    <p>3. 게시하고 싶은 영상의 페이지로 가서 제목과 링크를 확인합니다.<br><br><img src="3.PNG" width="400px"></p>
+    <p>4. 미리보기 사진 추출하기에서 영상의 링크를 붙여넣기 한 후,<br>&nbsp;&nbsp; 이미지가 뜨면 마우스 우클릭하여 이미지 주소를 복사합니다.<br><br><img src="4.PNG" width="400px"></p>
+    <p>5. 링크들을 붙여넣기 한 후, 등록 버튼을 클릭합니다.<br><br><img src="5.PNG" width="400px"></p>
+    <p>6. 등록된 게시물을 확인합니다.<br><br><img src="6.PNG" width="600px"></p>
+    
+    
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    let all = location.href.split("?")[1];
+  let name = all.split("=")[1].split(",")[0]
+  let id = all.split("=")[1].split(",")[1]
+    document.querySelector('#list').onclick = (e) => {
+      location.href = `list.html?${all}`;
+    };
+    document.querySelector('#form').onclick = (e) => {
+      location.href = `form.html?${all}`;
+    };
+    $(".go-1").click(() => {
+      location.href = `../live.html?${all}`;
+    })
+    $(".go-2").click(() => {
+      location.href = `../guestboard/guestboard.html?${all}`;
+    })
+    $(".go-5").click(() => {
+      location.href = `?${all}`;
+    })
+    $(".go-6").click(() => {
+      location.href = `../app/list.html?${all}`;
+    })
+  </script>
+</body>
+</html>
+
+
+
+
+<!--  <div id="board">
+    <img src="https://i.ytimg.com/vi/chI0nkP07-M/maxresdefault.jpg">
+    <h2>[모아보기] 웬만한 악과 깡으로는 살아남기 힘들었던 90년대 레전드 영상｜크랩</h2>
+    <p>크랩 효자 콘텐츠인 90년대 뉴트로 콘텐츠! 많고 많은 레전드 영상 중 찐 레전드만 모아봤습니다. 핸드폰과 유튜브만 준비해 주시죠. 제대로 모시겠습니다.</p>
+  </div> -->

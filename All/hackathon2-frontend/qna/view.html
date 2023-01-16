@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>게시글 수정</title>
+  <style>
+    table {
+      width: 600px;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #666666;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <h1>하이텔</h1>
+    <ul>
+      <li class="go-1">라이브채팅</li>
+      <li class="go-2">방명록</li>
+      <li class="go-3">그 때 그시절..☆</li>
+      <li class="go-6">이것 저것 공유</li>
+    </div>
+  
+    <div id="content">
+
+      <h1>게시글 변경/삭제</h1>
+      <form>
+      <table border="1">
+        <tbody>
+          <tr>
+            <th>번호</th>
+            <td><input type="text" name="no" id="f-no" style="width:90%; height:80%; font-size:20px;" readonly></td>
+          </tr>
+          <tr>
+            <th>제목</th>
+            <td><input type="text" name="title" id="f-title" style="width:90%; height:80%; font-size:20px;"></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea name="content" id="f-content" style="width:90%; height:200px; font-size:20px;"></textarea></td>
+          </tr>
+          <tr>
+            <th>작성일</th>
+            <td><span id="f-createddate"></span></td>
+          </tr>
+          <tr>
+            <th>조회수</th>
+            <td><span id="f-viewcount"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="update-btn" type="button">변경</button>
+      <button id="delete-btn" type="button">삭제</button>
+      <button id="list-btn" type="button">목록</button>
+      <button id="answer-btn" type="button">답변하기</button>
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+  var no = parseInt(location.href.split("?")[1].split("&")[0].split("=")[1]);
+  let all = location.href.split("?")[1].split("&")[1];
+  let name = all.split("=")[1].split(",")[0]
+  let id = all.split("=")[1].split(",")[1]
+
+  if (isNaN(no)) {
+    alert("게시글 번호가 옳지 않습니다.");
+    throw "no 파라미터 값이 숫자가 아닙니다.";
+  }
+
+fetch(`http://192.168.0.7:8080/qnas/${no}`)
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("서버 요청 오류!");
+      console.log(obj.data);
+      return;
+    }
+    document.querySelector("#f-no").value = obj.data.no;
+    document.querySelector("#f-title").value = obj.data.title;
+    document.querySelector("#f-content").value = obj.data.content;
+    document.querySelector("#f-createddate").innerHTML = obj.data.createdDate;
+    document.querySelector("#f-viewcount").innerHTML = obj.data.viewCount;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err)
+  });
+
+document.querySelector('#update-btn').onclick = (e) => {
+  var title = encodeURIComponent(document.querySelector('#f-title').value);
+  var content = encodeURIComponent(document.querySelector('#f-content').value);
+  
+  var qpassword = prompt('암호를 입력하세요!');
+
+  fetch(`http://192.168.0.7:8080/qnas/${no}`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `title=${title}&content=${content}&qpassword=${qpassword}`
+  })
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("게시글 변경 오류!\n" + obj.data);
+      return;
+    }
+
+    location.href = `list.html?${all}`;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+
+
+};
+
+document.querySelector('#delete-btn').onclick = (e) => {
+  var qpassword = prompt('암호를 입력하세요!');
+
+  fetch(`http://192.168.0.7:8080/qnas/${no}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `qpassword=${qpassword}`
+  })
+  .then((response) => response.json())
+  .then((obj) => {
+    if (obj.status == "failure") {
+      alert("게시글 삭제 오류!\n" + obj.data);
+      return;
+    }
+
+    location.href = `list.html?${all}`;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+};
+
+document.querySelector('#list-btn').onclick = (e) => {
+  location.href = `list.html?${all}`;
+};
+
+document.querySelector('#answer-btn').onclick = (e) => {
+  location.href = `./list.html?${all}`;
+}
+$(".go-1").click(() => {
+      location.href = `../live.html?${all}`;
+    })
+    $(".go-2").click(() => {
+      location.href = `../guestboard/guestboard.html?${all}`;
+    })
+    $(".go-3").click(() => {
+      location.href = `../you/list.html?${all}`;
+    })
+    $(".go-6").click(() => {
+      location.href = `../app/list.html?${all}`;
+    })
+</script>
+</body>
+</html>

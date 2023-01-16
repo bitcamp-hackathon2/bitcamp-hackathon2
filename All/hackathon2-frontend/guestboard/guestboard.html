@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방명록</title>
+  <link rel="stylesheet" href="css/guestbook.css">
+  <link rel="stylesheet" href="css/node_modules/animate.css/animate.css">
+</head>
+<body>
+  <div id="body">
+    <nav>
+      <div id="nav">
+      <span id="home-btn" class="clickable clickable-blue">[홈]</span>
+      <span id="writeGuestBoard" class="clickable clickable-blue">[글쓰기]</span>
+      </div>
+    </nav>
+    <header>
+      <div id="header">
+<pre id="title">
+              ■■      ■■  ■■                      ■■■■■■■      ■■                    ■■■■■■■■■■
+              ■■      ■■  ■■                      ■■■■■■■  ■■■■                    ■■■■■■■■■■
+              ■■■■■■■  ■■                      ■■      ■■  ■■■■                                    ■■
+              ■■■■■■■  ■■■■                  ■■      ■■      ■■                    ■■■■■■■■■■
+              ■■      ■■  ■■■■                  ■■      ■■      ■■                    ■■
+              ■■      ■■  ■■                      ■■      ■■  ■■■■                    ■■■■■■■■■■
+              ■■■■■■■  ■■                      ■■■■■■■  ■■■■                    ■■■■■■■■■■
+              ■■■■■■■  ■■                      ■■■■■■■      ■■                            ■■
+                                                                                                    ■■■■■■■■■■
+                    ■■■■■■                                ■■■■■■                         
+                  ■■■■■■■■                            ■■■■■■■■                      ■■■■■■■■■■
+                ■■            ■■                        ■■            ■■                    ■■■■■■■■■■
+                ■■            ■■                        ■■            ■■                                    ■■
+                  ■■■■■■■■                            ■■■■■■■■                                      ■■
+                    ■■■■■■                                ■■■■■■                                        ■■
+</pre>
+      </div>
+    </header>
+    
+    <ul id="guestbook-ul">
+    </ul>
+    </div>
+    
+    <div id="writeDiv" class="writeDivHide">
+      <div id="writeBG">
+      </div>
+      <div id="write">
+        <div id="write-title">
+          <span id="whatswrong">무슨 일이 일어나고 있나요?</span>
+          <span id="writeCloseBtn" class="clickable clickable-green">×</span>
+        </div>
+        <hr>
+        <div id="content-div">
+          <textarea id="writeArea"></textarea>
+        </div>
+        <div id="writeInfo">
+          <span id="charCount"></span>
+          <span id="writeBtn" class="clickable clickable-green">[남기기]</span>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="js/guestboard.js"></script>
+    <script src="js/guestboardFetch.js"></script>
+
+</body>
+</html>

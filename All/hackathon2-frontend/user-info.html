@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Page Title</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+  <div class="background">
+    
+    <div class="user-login">
+      <span>비밀번호 환인</span>
+      <input type="text" class="user-login-id" disabled/>
+      <input type="password" class="user-login-password">
+      <button type="button" class="user-login-btn lb">LOGIN</button>
+    </div>
+    <div class="user-info">
+      <span>닉네임</span>
+      <input type="text" class="user-info-name">
+      <button type="button" class="user-login-btn ibc">닉네임/etc 변경</button>
+      <button type="button" class="user-login-btn ibd">계정 삭제</button>
+    </div>
+    <div class="user-etc">
+      <span>기타</span><br>
+      <textarea class="user-etc-text"></textarea>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    let all = location.href.split("?")[1];
+    let name = all.split("=")[1].split(",")[0]
+    let id  = all.split("=")[1].split(",")[1]
+    let etc;
+    let password;
+    $('.ibc').attr('disabled', true);
+    $('.ibd').attr('disabled', true);
+    $('.user-info-name').attr('disabled', true);
+    $('.user-etc-text').attr('disabled', true);
+
+    $(".user-login-id").val(id)
+    $(".lb").click(() => {
+      password = $(".user-login-password").val();
+      if (password.length > 7){
+        fetch("http://192.168.0.7:8080/afterlogin", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}&password=${password}`
+        }).then((response) => response.json())
+        .then((fn) => {
+          if(fn.status == "success"){
+            etc = fn.etc;
+            name = fn.name;
+            alert("올바른 비밀번호");
+            $('.lb').attr('disabled', true);
+            $('.user-login-password').attr('disabled', true);
+            $(".user-info-name").val(decodeURI(name));
+            $(".user-etc-text").val(etc);
+            $('.ibc').attr('disabled', false);
+            $('.ibd').attr('disabled', false);
+            $('.user-info-name').attr('disabled', false);
+            $('.user-etc-text').attr('disabled', false);
+          }else{
+            alert("패스워드 틀림");
+          }
+        })
+        
+      }
+    })
+    $(".ibc").click(() => {
+      let asking = confirm("계정을 변경 하시겠습니까?")
+      if(asking){
+        fetch("http://192.168.0.7:8080/changeinfo", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}&password=${password}&name=${$(".user-info-name").val()}&etc=${$(".user-etc-text").val()}`
+        }).then((response) => response.json())
+        .then((fn) => {
+          if(fn.status == "success"){
+            alert("정상적으로 변경 됨");
+            location.href = `main-menu.html?user=${$(".user-info-name").val()},${id}`;
+          }else{
+            alert("변경 실패(이미 사용중인 닉네임)");
+          }
+        })
+      }
+      
+    })
+    $(".ibd").click(() => {
+      let asking = confirm("계정을 삭제 하시겠습니까?")
+      if(asking){
+        fetch("http://192.168.0.7:8080/removeuser", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+          },
+          body: `id=${id}&password=${password}`
+        }).then((response) => response.json())
+        .then((fn) => {
+          if(fn.status == "success"){
+            alert("계정 삭제 완료");
+            location.href = `sign-in.html`
+          }else{
+            alert("계정 삭제 불가능");
+          }
+        })
+      }
+
+      
+    })
+  </script>
+</body>
+</html>
