@@ -41,7 +41,7 @@
     $(".lb").click(() => {
       password = $(".user-login-password").val();
       if (password.length > 7){
-        fetch("http://localhost/afterlogin", {
+        fetch("http://192.168.0.7:8080/afterlogin", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -71,7 +71,7 @@
     $(".ibc").click(() => {
       let asking = confirm("계정을 변경 하시겠습니까?")
       if(asking){
-        fetch("http://localhost:8080/changeinfo", {
+        fetch("http://192.168.0.7:8080/changeinfo", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -92,7 +92,7 @@
     $(".ibd").click(() => {
       let asking = confirm("계정을 삭제 하시겠습니까?")
       if(asking){
-        fetch("http://localhost:8080/removeuser", {
+        fetch("http://192.168.0.7:8080/removeuser", {
           method: "POST",
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
