@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'DungGeunMo';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-  font-weight: lighter;
   font-style: normal;
 }
 
@@ -69,4 +68,9 @@ x#menu ul > li {
   padding: 10px;
   height: 120px;
   min-height: 120px;
+}
+
+td {
+  text-align: center;
+  font-weight: bold;
 }
