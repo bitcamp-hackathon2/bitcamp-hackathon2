@@ -106,7 +106,13 @@
           }
         })
       }else {
-        alert("입력이 안됐거나\n길이가 너무길거나 짧거나\n중복 체크가 안됐거나\n택 1");
+        if(!namechecked){
+          alert("닉네임 중복검사 필요");
+        }else if(!idchecked){
+          alert("아이디 중복검사 필요");
+        }else if(password.length <= 7){
+          alert("비밀번호 8자 이상 입력 필요");
+        }
       }
     })
     $(".bit-sign-checkid").click(() => {

@@ -8,7 +8,7 @@
 <body>
   <div class="background">
     <div class="command">
-      <span>위(↑)<br><br>아래 (↓)<br><br>이전 페이지(→)<br><br>다음 페이지(→)<br><br>계정 삭제(Del)<br><br>계정 경고(Ctrl + U)</span>
+      <span>위(↑)<br><br>아래 (↓)<br><br>이전 페이지(→)<br><br>다음 페이지(→)<br><br>계정 삭제(D)<br><br>계정 경고(P)</span>
     </div>
     <div class="left-bar">
       <div class="left-bar-title">
@@ -118,6 +118,27 @@
           $("li")[0].className = "checked";
           dreg = 1;
           changeInfo(dreg)-1;
+        }
+      }else if(e.keyCode == 80){ // P
+
+      }else if(e.keyCode == 68){ // D
+        let asking = confirm("사용자의 계정을 삭제 하시겠습니까?")
+        if(asking) {
+          fetch("http://192.168.0.7:8080/removeuser", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/x-www-form-urlencoded"
+            },
+            body: `id=${userList[page*16 + dreg-1].id}&password=${userList[page*16 + dreg-1].password}`
+          }).then((response) => response.json())
+          .then((fn) => {
+            if(fn.status == "success"){
+              alert("계정 삭제 완료");
+              location.href = `?`
+            }else{
+              alert("계정 삭제 불가능");
+            }
+          })
         }
       }
     })

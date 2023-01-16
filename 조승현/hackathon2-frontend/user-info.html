@@ -69,7 +69,7 @@
       }
     })
     $(".ibc").click(() => {
-      let asking = confirm("계정을 변경 하시겠습니가?")
+      let asking = confirm("계정을 변경 하시겠습니까?")
       if(asking){
         fetch("http://192.168.0.7:8080/changeinfo", {
           method: "POST",
@@ -83,14 +83,14 @@
             alert("정상적으로 변경 됨");
             location.href = `main-menu.html?user=${$(".user-info-name").val()},${id}`;
           }else{
-            alert("변경 실패");
+            alert("변경 실패(이미 사용중인 닉네임)");
           }
         })
       }
       
     })
     $(".ibd").click(() => {
-      let asking = confirm("계정을 삭제 하시겠습니가?")
+      let asking = confirm("계정을 삭제 하시겠습니까?")
       if(asking){
         fetch("http://192.168.0.7:8080/removeuser", {
           method: "POST",
@@ -104,7 +104,7 @@
             alert("계정 삭제 완료");
             location.href = `sign-in.html`
           }else{
-            alert("계정 삭제 안대");
+            alert("계정 삭제 불가능");
           }
         })
       }
