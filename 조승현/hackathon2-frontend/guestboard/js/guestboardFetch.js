@@ -26,7 +26,7 @@ fetch("http://localhost:8080/guestboard")
               <span class="id">@${e.id}</span>
               <span class="elapsedTime">${getElapsedTime(e.createdTime)}</span>
               <span class="likeSpan">
-                <span class="likeIcon clickable ${isLiked(e.id, e.likeId)}" data-no="${e.no}"></span>
+                <span class="likeIcon clickable ${isLiked(id, e.likeId)}" data-no="${e.no}"></span>
                 <span class="like"> ${e.like}</span>
               </span>
             </div>

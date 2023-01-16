@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+
+  <div id="menu">
+  <h1>하이텔</h1>
+  <ul>
+    <li class="go-1">라이브채팅</li>
+    <li class="go-2">방명록</li>
+    <li class="go-5">뉴스</li>
+    <li class="go-6">이것 저것 공유</li>
+  </div>
+
+  <div id="content">
+    <h1>그때 그시절..☆</h1>
+    <p>
+    90년대는 어땠을까요?<br>
+    90년대의 모습, 영상을 모아봤습니다.
+    </p>
+    <a class="content-info">게시물 작성 방법</a><br>
+    <a id="form">게시물 작성하기</a><br>
+    <p></p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>미리보기</th>
+          <th>제목</th>
+          <th>아이디</th>
+          <th>작성일</th>
+          <th>조회수</th>
+        </tr>
+        <tr>
+          <td> 1</td>
+          <td><img src="https://i.ytimg.com/vi/chI0nkP07-M/maxresdefault.jpg" width = "150"></td>
+          <td><a href="https://www.youtube.com/watch?v=chI0nkP07-M">[모아보기] 웬만한 악과 깡으로는 살아남기 힘들었던 90년대 레전드 영상｜크랩</a></td>
+          <td>admin1</td>
+          <td>2023-01-15</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td> 2</td>
+          <td><img src="https://i.ytimg.com/vi/bMSSOzE0Q2A/maxresdefault.jpg" width = "150"></td>
+          <td><a href="https://www.youtube.com/watch?v=bMSSOzE0Q2A">서울-대전 10시간;; 고속도로에서 밥 지어 먹던 90년대 귀성길 클라스 대방출 l 꿀잼 보장</a></td>
+          <td>admin1</td>
+          <td>2023-01-15</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td> 3</td>
+          <td><img src="https://i.ytimg.com/vi/bv6euol2IYk/maxresdefault.jpg" width = "150"></td>
+          <td><a href="https://www.youtube.com/watch?v=bv6euol2IYk">개마저 떡실신시킨 80년대 여름</a></td>
+          <td>admin1</td>
+          <td>2023-01-16</td>
+          <td>3</td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+  
+  let all = location.href.split("?")[1];
+  let name = all.split("=")[1].split(",")[0]
+  let id = all.split("=")[1].split(",")[1]
+  var tbody = document.querySelector("tbody");
+  
+  fetch('http://localhost:8080/youtubes')
+    .then((response) => {return response.json();})
+    .then((obj) => {
+      var html = '';
+      for (var y of obj.data) {
+        html += `<tr>
+          <th>${y.no}</th>
+          <th><img src="${y.thumbnail}" width = "150"></th>
+          <th><a href="${y.link}">${y.title} </a></th>
+          <th><a href="view.html?no=${y.no}">${y.id}</th>
+          <th>${y.createdDate}</th>
+          <th>${y.viewCount}</th>
+          </tr>\n`;
+      }
+      tbody.innerHTML = html;
+    })
+    .catch((err) => {
+      alert("서버 요청 오류!");
+      console.log(err);
+    });  
+    $(".content-info").click(() => {
+      location.href = `instruction.html?${all}`;
+    })
+    document.querySelector('#form').onclick = (e) => {
+      location.href = `form.html?${all}`;
+    };
+    $(".go-1").click(() => {
+      location.href = `../live.html?${all}`;
+    })
+    $(".go-2").click(() => {
+      location.href = `../guestboard/guestboard.html?${all}`;
+    })
+    $(".go-5").click(() => {
+      location.href = `?${all}`;
+    })
+    $(".go-6").click(() => {
+      location.href = `../app/list.html?${all}`;
+    })
+  </script>
+
+</body>
+</html>
+
+
+
+
+<!--
+  제목 클릭하면 이동
+  작성자 클릭하면 수정
+ -->

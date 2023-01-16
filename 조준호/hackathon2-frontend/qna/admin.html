@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>관리자등록</title>
+  <style>
+    table {
+      width: 600px;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #666666;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <h1>하이텔</h1>
+    <ul>
+      <li class="c1">그래픽 자료실</li>
+      <li class="c1">그때 그시절..☆</li>
+      <li class="c1">뉴스</li>
+      <li class="c1">방명록</li>
+      <li class="c1">관리자</li>
+    </div>
+
+    <div id="content">
+      <h1>관리자 등록</h1>
+      <form>
+      <table border="1">
+        <tbody>
+          <tr>
+            <th>관리자ID</th>
+            <td><input type="text1" name="aid" id="f-aid" style="width:90%; height:80%; font-size:20px;"></td>
+          </tr>
+          <tr>
+            <th>관리자 암호</th>
+            <td><input type="text3" name="apassword"  id="f-apassword" style="width:90%; height:80%; font-size:20px;"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-btn">
+        <button id="add-btn" type="button">등록</button>
+        <button id="cancel-btn" type="button">취소</button>
+      </div>
+      </form>
+    </div>
+
+<script>
+document.querySelector('#add-btn').onclick = (e) => {
+  var aid = encodeURIComponent(document.querySelector('#f-aid').value);
+  var apassword = document.querySelector('#f-apassword').value;
+  
+
+  console.log(`aid=${aid}&apassword=${apassword}`);
+  fetch('http://localhost:8080/qnas', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `aid=${aid}&apassword=${apassword}`
+  })
+  // .then((response) => {return response.json();})
+  // .then((obj) => {
+  //   location.href = "view.html";
+  // })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+};
+
+document.querySelector('#cancel-btn').onclick = (e) => {
+  location.href = "list.html";
+};
+
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/hackathon2-frontend/app/css/style.css">
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="head-nav">
+    <a href="list.html" id="head-nav-home" >홈</a>
+    <a id="aa" href="#">방명록</a>
+    <a id="aa" href="#">그때 그 시절..☆</a>
+    <a id="aa" href="#">뉴스</a>
+  </nav>
+  <div class="blanktop"></div>
+  <form id="main">
+    <div class="nes-table-responsive">
+      <table class="nes-table is-bordered is-centered">
+        <tbody id="view-table">
+          <tr>
+            <th>번호</th>
+            <td name="no" id="f-no" style="width: 100%" readonly>정보글 예시</td>
+          </tr>
+          <tr>
+            <th>제목</th>
+            <td name="title" id="f-title" style="width: 100%">헬스 꿀팁 총정리</td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td name="content" rows="10" cols="50" id="f-content" style="width: 100%" onclick="location.href='https://youtu.be/JV5u0tHVrX4'">Click! 꿀팁 보러가기</td>
+          </tr>
+          <tr>
+            <th>작성일</th>
+            <td><span id="f-createddate"></span>2023-01-16</td>
+          </tr>
+          <tr>
+            <th>조회수</th>
+            <td><span id="f-viewcount"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btns">
+      <a class="nes-btn" href="list.html">목록</a>
+    </div>
+  </form>
+
+<script>
+
+document.querySelector('#list-btn').onclick = (e) => {
+  location.href = "list.html";
+};
+
+</script>
+</body>
+</html>
