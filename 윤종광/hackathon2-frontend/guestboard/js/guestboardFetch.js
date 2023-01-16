@@ -11,29 +11,41 @@ const id = 'a'; // 임시 id
 fetch("http://localhost:8080/guestboard")
 .then((response) => response.json())
 .then((obj) => {
-  let lis = "";
-  for (let e of obj.data) {
-    lis =
-      `<li class="board">
-        <div>
-          <span class="name">${e.name}</span>
-          <span class="id">@${e.id}</span>
-          <span class="elapsedTime">${getElapsedTime(e.createdTime)}</span>
-          <span class="likeSpan">
-            <span class="likeIcon clickable ${isLiked(e.id, e.likeId)}" data-no="${e.no}"></span>
-            <span class="like"> ${e.like}</span>
-          </span>
-        </div>
-        <hr>
-        <div class="contentMain">
-          <div class="content">${e.content}</div>
-          <div class="del-up-btn">
-            ${loginIdDelUpBtn(e.no)}
-          </div>
-        </div>
-      </li>` + lis;
-    }
-    document.querySelector('#guestbook-ul').innerHTML = lis;
+
+  for (let i = 0; i <= obj.data.length; i++) {
+    (function () {
+      setTimeout(() => {
+        const e = obj.data[i];
+        const ul = document.querySelector('#guestbook-ul');
+        const li = document.createElement('li');
+        li.classList.add('board');
+        const liContent =
+          `<div>
+              <span class="name">${e.name}</span>
+              <span class="id">@${e.id}</span>
+              <span class="elapsedTime">${getElapsedTime(e.createdTime)}</span>
+              <span class="likeSpan">
+                <span class="likeIcon clickable ${isLiked(e.id, e.likeId)}" data-no="${e.no}"></span>
+                <span class="like"> ${e.like}</span>
+              </span>
+            </div>
+            <hr>
+            <div class="contentMain">
+              <div class="content">${e.content}</div>
+              <div class="del-up-btn">
+                ${loginIdDelUpBtn(e.no)}
+              </div>
+            </div>
+          `;
+        
+        li.innerHTML = liContent;
+        ul.appendChild(li);
+
+      }, -(i-obj.data.length)*500);
+    })(i);
+  }
+  
+
   
     workAfterLoad();
 
