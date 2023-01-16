@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML</title>
+  <link rel="stylesheet" href="style.css"><link>
+</head>
+<body>
+
+  <div id="menu">
+  <h1>하이텔</h1>
+  <ul>
+    <li class="go-1">라이브채팅</li>
+    <li class="go-2">방명록</li>
+    <li class="go-5">뉴스</li>
+    <li class="go-6">이것 저것 공유</li>
+  </div>
+
+  <div id="content">
+    <h1>그때 그시절..☆</h1>
+    <h3>게시물 작성하기</h3>
+    <p>
+    90년대는 어땠을까요?<br>
+    90년대의 모습, 영상을 올려주세요.
+    </p>
+    <a id="list">게시물 보러가기</a><br>
+    <a id="instruction">게시물 작성 방법</a><br>
+    <p></p>
+    
+    <a href="https://kr.noxinfluencer.com/youtube/thumbnails-download">미리보기 사진 주소 추출하기</a>
+
+    <p></p>
+    
+<form>
+<table border="1">
+  <tbody>
+    <tr>
+      <th>미리보기</th>
+      <td><input type="text" name="thumbnail" id="f-thumbnail"></td>
+    </tr>
+    <tr>
+      <th>제목</th>
+      <td><input type="text" name="title" id="f-title"></td>
+    </tr>
+    <tr>
+      <th>아이디</th>
+      <td><input type="text" name="id" id="f-id"></td>
+    </tr>
+    <tr>
+      <th>링크</th>
+      <td><input type="text" name="link" id="f-link"></td>
+    </tr>
+  </tbody>
+</table>
+<button id="add-btn" type="button">등록</button>
+<button id="cancel-btn" type="button">취소</button>
+</form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+  let all = location.href.split("?")[1];
+  let name = all.split("=")[1].split(",")[0]
+  let id = all.split("=")[1].split(",")[1]
+  document.querySelector('#add-btn').onclick = (e) => {
+    var thumbnail = document.querySelector('#f-thumbnail').value;
+    var title = encodeURIComponent(document.querySelector('#f-title').value);
+    var id = document.querySelector('#f-id').value;
+    var link = document.querySelector('#f-link').value;
+  
+    // console.log(`title=${title}&content=${content}&password=${password}`);
+    fetch('http://localhost:8080/youtubes', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded'
+      },
+      body: `thumbnail=${thumbnail}&title=${title}&content=${content}&id=${id}&link=${link}}`
+    })
+    .then((response) => {return response.json();})
+    .then((obj) => {
+      location.href = `list.html?${all}`;
+    })
+    .catch((err) => {
+      alert("서버 요청 오류!");
+      console.log(err);
+    });
+  };
+  
+  document.querySelector('#cancel-btn').onclick = (e) => {
+    location.href = `list.html?${all}`;
+  };
+  document.querySelector('#list').onclick = (e) => {
+      location.href = `list.html?${all}`;
+    };
+    document.querySelector('#instruction').onclick = (e) => {
+      location.href = `instruction.html?${all}`;
+    };
+    $(".go-1").click(() => {
+      location.href = `../live.html?${all}`;
+    })
+    $(".go-2").click(() => {
+      location.href = `../guestboard/guestboard.html?${all}`;
+    })
+    $(".go-5").click(() => {
+      location.href = `?${all}`;
+    })
+    $(".go-6").click(() => {
+      location.href = `../app/list.html?${all}`;
+    })
+  </script>
+
+</body>
+</html>

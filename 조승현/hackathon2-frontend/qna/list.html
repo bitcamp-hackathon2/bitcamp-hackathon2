@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>QnA</title>
+  <style>
+    table {
+      width: 600px;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #666666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <h1>하이텔</h1>
+    <ul>
+      <li class="go-1">라이브채팅</li>
+      <li class="go-2">방명록</li>
+      <li class="go-3">그 때 그시절..☆</li>
+      <li class="go-6">이것 저것 공유</li>
+    </div>
+  
+    <div id="content">
+      <h1>QnA</h1>
+      <a class="ask">질문하기</a>
+      <!-- <a class="admin">관리자등록</a> -->
+      <table border="1">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자ID</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th>답변여부</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+var tbody = document.querySelector("tbody");
+let all = location.href.split("?")[1];
+    let name = all.split("=")[1].split(",")[0]
+    let id = all.split("=")[1].split(",")[1]
+fetch('http://localhost:8080/qnas')
+  .then((response) => {return response.json();})
+  .then((obj) => {
+    var html = '';
+    for (var b of obj.data) {
+      html += `<tr>
+        <td>${b.no}</td>
+        <td><a href="view.html?no=${b.no}&${all}">${b.title} </a></td>
+        <td>${b.id}</td>
+        <td>${b.createdDate}</td>
+        <td>${b.viewCount}</td>
+        <td>${b.answer ? 'O' : 'X'}</td>
+        </tr>\n`;
+    }
+    tbody.innerHTML = html;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+  $(".ask").click(() => {
+    location.href = `form.html?${all}`;
+  })
+  $(".go-1").click(() => {
+      location.href = `../live.html?${all}`;
+    })
+    $(".go-2").click(() => {
+      location.href = `../guestboard/guestboard.html?${all}`;
+    })
+    $(".go-3").click(() => {
+      location.href = `../you/list.html?${all}`;
+    })
+    $(".go-6").click(() => {
+      location.href = `../app/list.html?${all}`;
+    })
+</script>
+</body>
+</html>

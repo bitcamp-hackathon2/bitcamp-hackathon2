@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+</head>
+<body> 
+  <nav class="head-nav">
+    <a id="head-nav-home" class="go-0">홈</a>
+    <a id="aa" class="go-2">방명록</a>
+    <a id="aa" class="go-4">그때 그 시절..☆</a>
+    <a id="aa" class="go-5">뉴스</a>
+  </nav>
+  <form id="main">
+    <div class="nes-table-responsive">
+      <table class="nes-table is-bordered is-centered">
+        <tbody id="form-table">
+          <tr>
+            <th>제목</th>
+            <td><input type="text" name="title" id="f-title" style="width: 100%"></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea name="content" rows="10" cols="50" id="f-content" style="width: 100%"></textarea></td>
+          </tr>
+          <tr>
+            <th>암호</th>
+            <td><input type="password" name="password" id="f-password" tyle="width: 100%"></td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btns">
+      <button type="button" class="nes-btn is-primary" id="add-btn">등록</button>
+      <a class="nes-btn" href="list.html" id="cancel-btn">취소</a>
+    </div>
+  </form>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+
+let all = location.href.split("?")[1];
+let name = decodeURI(all.split("=")[1].split(",")[0])
+let id  = all.split("=")[1].split(",")[1]
+document.querySelector('#add-btn').onclick = (e) => {
+  var title = encodeURIComponent(document.querySelector('#f-title').value);
+  var content = encodeURIComponent(document.querySelector('#f-content').value);
+  var password = document.querySelector('#f-password').value; // name?
+
+  fetch('http://localhost:8080/boards', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    },
+    body: `title=${title}&name=${name}&content=${content}&password=${password}`
+  })
+  .then((response) => {return response.json();})
+  .then((obj) => {
+    location.href = `list.html?${all}`;
+  })
+  .catch((err) => {
+    alert("서버 요청 오류!");
+    console.log(err);
+  });
+};
+$(".go-0").click(() => {
+    location.href = `../main-menu.html?${all}`;
+  })
+  $(".go-2").click(() => {
+    location.href = `../guestboard/guestboard.html?${all}`;
+  })
+  $(".go-4").click(() => {
+    location.href = `?${all}`;
+  })
+  $(".go-5").click(() => {
+    location.href = `?${all}`;
+  })
+</script>
+</body>
+</html>

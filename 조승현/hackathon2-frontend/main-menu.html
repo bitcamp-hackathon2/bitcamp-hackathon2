@@ -19,10 +19,10 @@
           <ul>
             <li class="checked">1. &nbsp라이브 채팅</li>
             <li>2. &nbsp방명록</li>
-            <li>3. &nbsp게임?</li>
+            <li>3. &nbsp그 때 그시절..☆</li>
             <li>4. &nbsp회원 관리/내 정보</li>
-            <li>5. &nbsp그 때 그시절..☆</li>
-            <li>6. &nbsp..</li>
+            <li>5. &nbspQnA</li>
+            <li>6. &nbsp이것 저것 공유</li>
           </ul>
         </div>
       </div>
@@ -69,7 +69,7 @@
         }else if(dreg == 2){
           location.href = `./guestboard/guestboard.html?${all}`;
         }else if(dreg == 3){
-          location.href = `?${all}`;
+          location.href = `you/list.html?${all}`;
         }else if(dreg == 4){
           if(all.split("=")[1].split(",")[1].indexOf("admin") >= 0){
             location.href = `admin-info.html?${all}`;
@@ -77,9 +77,9 @@
             location.href = `user-info.html?${all}`;
           }
         }else if(dreg == 5){
-          location.href = `?${all}`;
+          location.href = `qna/list.html?${all}`;
         }else if(dreg == 6){
-          location.href = `?${all}`;
+          location.href = `app/list.html?${all}`;
         }
       }
     })
