@@ -20,46 +20,31 @@ import bitcamp.bootapp.vo.Youtube;
 @RestController	// JSON
 
 public class YoutubeController {
+	/*
+	public static void main(String[] args) {
+		
+		// Youtube 게시물 기본 목록
+		int no = 1;	// Youtube 게시물 번호 	// 입력 X 
+		String title = "[모아보기] 웬만한 악과 깡으로는 살아남기 힘들었던 90년대 레전드 영상｜크랩";	// Youtube 게시물 제목
+		String content = "[설 연휴 크랩 모아보기 1탄!]" + 
+				"크랩 효자 콘텐츠인 90년대 뉴트로 콘텐츠! 많고 많은 레전드 영상 중 찐 레전드만 모아봤습니다. 핸드폰과 유튜브만 준비해 주시죠. 제대로 모시겠습니다.";	// Youtube 게시물 내용
+		String id = "admin";	// Youtube 작성자 id
+		// 작성자의 id와 Youtube 게시물 작성자 비밀번호와 같다면 수정 및 삭제 가능하도록 하기
+		String password = "admin";	// Youtube 게시물 작성자 비밀번호
+		String createdDate = "2023-01-14";	// Youtube 게시물 작성일
+		String link ="https://www.youtube.com/watch?v=chI0nkP07-M&t=1s";	// Youtube 링크
+	}
+*/
 
   @Autowired YoutubeDao youtubeDao;	// 인스턴스 필드에만  오토와일드 가능
 
   // Youtube 게시물 생성
   @PostMapping("/youtubes")
-  public Object addYoutube(
-		  @RequestParam(required = false) String title,
-	      @RequestParam(required = false) String link,
-	      @RequestParam(required = false) String thumbnail,
-	      @RequestParam(required = false) String id) {
+  public Object addYoutube(Youtube youtube) {
 
-	  Youtube y = new Youtube();
-	    
-	    y.setTitle("[모아보기] 웬만한 악과 깡으로는 살아남기 힘들었던 90년대 레전드 영상｜크랩");
-	    y.setLink("https://www.youtube.com/watch?v=chI0nkP07-M");
-	    y.setThumbnail("https://i.ytimg.com/vi/chI0nkP07-M/maxresdefault.jpg");
-	    y.setId("지윤");
-	    y.setCreatedDate(new Date(System.currentTimeMillis()).toString());
-	
-	    this.youtubeDao.insert(y);
-	    
-	    Youtube o = new Youtube();
-	    
-	    o.setTitle("개마저 떡실신시킨 80년대 여름");
-	    o.setLink("https://www.youtube.com/watch?v=bv6euol2IYk");
-	    o.setThumbnail("https://i.ytimg.com/vi/bv6euol2IYk/maxresdefault.jpg");
-	    o.setId("지윤");
-	    o.setCreatedDate(new Date(System.currentTimeMillis()).toString());
-	
-	    this.youtubeDao.insert(o);
-	    
-	    Youtube u = new Youtube();
-	    
-	    u.setTitle("서울-대전 10시간;; 고속도로에서 밥 지어 먹던 90년대 귀성길 클라스 대방출 l 꿀잼 보장");
-	    u.setLink("https://www.youtube.com/watch?v=bMSSOzE0Q2A");
-	    u.setThumbnail("https://i.ytimg.com/vi/bMSSOzE0Q2A/maxresdefault.jpg");
-	    u.setId("지윤");
-	    u.setCreatedDate(new Date(System.currentTimeMillis()).toString());
-	
-	    this.youtubeDao.insert(u);
+    youtube.setCreatedDate(new Date(System.currentTimeMillis()).toString());
+
+    this.youtubeDao.insert(youtube);
 
     Map<String,Object> contentMap = new HashMap<>();
     contentMap.put("status", "success");
@@ -69,14 +54,14 @@ public class YoutubeController {
 
   // 모든 Youtube 게시물 정보 가져오기
   @GetMapping("/youtubes")
-  public Object getYoutubes() {  
-	  
-	Youtube[] youtubes = this.youtubeDao.findAll();
+  public Object getYoutubes() {
+
+    Youtube[] youtubes = this.youtubeDao.findAll();
 
     Map<String,Object> contentMap = new HashMap<>();
     contentMap.put("status", "success");
     contentMap.put("data", youtubes);
-    
+
     return contentMap;
   }
 
@@ -85,7 +70,7 @@ public class YoutubeController {
   public Object getYoutube(@PathVariable int no) {
 
     Youtube y = this.youtubeDao.findByNo(no);
-    y.setViewCount(y.getViewCount() + 1);
+
     Map<String,Object> contentMap = new HashMap<>();
 
     if (y == null) {
