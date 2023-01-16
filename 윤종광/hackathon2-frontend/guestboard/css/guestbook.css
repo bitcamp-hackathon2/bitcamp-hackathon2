@@ -7,6 +7,7 @@
 
 * {
   font-family: DungGeunMo, Courier;
+  /* cursor: url(../../images/default.cur), auto; */
 }
 
 body {
@@ -62,6 +63,7 @@ textarea {
 
 .clickable {
   cursor: pointer;
+  /* cursor: url(../../images/pointer.cur), auto; */
 }
 
 .clickable-blue:hover {
@@ -80,7 +82,7 @@ textarea {
 
 .charCountRed {
   color: #df0101;
-  cursor: default;
+  /* cursor: url(../../images/default.cur), auto; */
 }
 
 #body {

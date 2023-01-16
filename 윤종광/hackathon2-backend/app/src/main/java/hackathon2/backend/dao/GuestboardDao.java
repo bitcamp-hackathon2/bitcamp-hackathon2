@@ -60,7 +60,7 @@ public class GuestboardDao {
     if (guestboard.getLikeId() == null || guestboard.getLikeId().size() == 0) {
       guestboard.setLike(0);
     } else {
-      guestboard.setLike(guestboard.getLikeId().size());      
+      guestboard.setLike(guestboard.getLikeId().size());
     }
   }
 

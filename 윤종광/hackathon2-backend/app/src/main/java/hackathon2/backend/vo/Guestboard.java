@@ -14,6 +14,16 @@ public class Guestboard {
   ArrayList<String> likeId;
   String content;
 
+  public Guestboard() {
+
+  }
+
+  public Guestboard(String id, String name, String content) {
+    this.id = id;
+    this.name = name;
+    this.content = content;
+  }
+
   public String getId() {
     return id;
   }
@@ -67,6 +77,9 @@ public class Guestboard {
   }
   public void setLikeId(ArrayList<String> likeId) {
     this.likeId = likeId;
+  }
+  public void addLikeId(String likeId) {
+    this.likeId.add(likeId);
   }
   public String getContent() {
     return content;
